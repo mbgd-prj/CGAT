@@ -1,0 +1,155 @@
+<project name="AlignmentViewer" default="dist" basedir=".">
+    <description>
+        build file for AlignmentViewer
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="manifest" location="build/MANIFEST"/>
+  <property name="image"  location="build/image"/>
+  <property name="param"  location="build/cgat.properties"/>
+  <property name="dist"  location="dist"/>
+  <property name="doc"  location="doc"/>
+  <property name="package"  value="cgat"/>
+  <property name="testdir"  value="testdir"/>
+  <property name="osx"  location="osx"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" includes="cgat/**"
+		excludes="**/BCK/**, *.BCK" debug="on" encoding="EUC_JP" />
+  </target>
+
+  <target name="junit">
+    <available property="junit.present" classname="junit.framwork.TestCase" />
+  </target>
+
+  <target name="manifest-file-check">
+    <available file="${manifest}" property="manifest-exists"/>
+  </target>
+  <target name="manifest" depends="manifest-file-check" unless="manifest-exists">
+	<echo message="Main-Class: cgat.AlignmentViewer" file="${manifest}"/>
+	<echo message="Main-Class: cgat.AlignmentViewerApplet" file="${manifest}_applet"/>
+	<echo message="Main-Class: cgat.AlignmentViewerMbgd" file="${manifest}_mbgd"/>
+  </target>
+
+  <target name="image">
+    <mkdir dir="${build}/image"/>
+    <copy todir="${build}/image" preservelastmodified="true">
+	<fileset dir="image">
+	</fileset>
+    </copy>
+  </target>
+
+  <target name="param">
+    <copy todir="${build}" preservelastmodified="true">
+	<fileset dir="." includes="cgat.properties,about_CGAT.txt">
+	</fileset>
+    </copy>
+  </target>
+
+  <target name="dist" depends="compile,manifest,image,param"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+
+    <!-- Put everything in ${build} into the jar file -->
+    <jar jarfile="${dist}/AlignmentViewer.jar" basedir="${build}" manifest="${manifest}" includes="cgat/,image/,cgat.properties,about_CGAT.txt"/>
+    <jar jarfile="${dist}/AlignmentViewerApplet.jar" basedir="${build}" manifest="${manifest}_applet" includes="cgat/,image/,cgat.properties,about_CGAT.txt"/>
+    <jar jarfile="${dist}/AlignmentViewerMbgd.jar" basedir="${build}" manifest="${manifest}_mbgd" includes="cgat/,image/,cgat.properties,about_CGAT.txt"/>
+  </target>
+
+  <target name="install_archive" depends="dist"
+        description="copy archives for distribution" >
+    <copy todir="../htdocs/CGAT" preservelastmodified="true">
+	<fileset dir="." includes="dist/AlignmentViewer.jar,dist/AlignmentViewerApplet.jar">
+	</fileset>
+    </copy>
+  </target>
+
+  <target name="compiletests" depends="dist">
+    <mkdir dir="${build}/testcases" />
+    <javac srcdir="${src}" destdir="${build}/testcases"
+		includes="test/**" debug="on" >
+	<classpath>
+	    <pathelement location="${dist}/AlignmentViewer.jar"/>
+	</classpath>
+    </javac>
+  </target>
+
+  <target name="runtests" depends="compiletests">
+    <mkdir dir="${build}/testcases" />
+    <mkdir dir="${testdir}" />
+
+    <junit fork="yes" printsummary="yes" haltonfailure="yes" filtertrace="on"
+		dir="${testdir}">
+        <test name="test.AllTests">
+	  <formatter type="plain"/>
+	</test>
+<!--
+	<batchtest fork="yes" >
+	  <fileset dir="${src}/test">
+	    <include name="**/*Test*.java"/>
+	    <exclude name="**/AllTests.java"/>
+	  </fileset>
+	</batchtest>
+-->
+	<classpath>
+	    <pathelement location="${dist}/AlignmentViewer.jar" />
+	    <pathelement location="${build}/testcases" />
+	    <pathelement location="${build}" />
+	    <pathelement location="/usr/local/javalib/junit.jar" />
+	</classpath>
+    </junit>
+  </target>
+
+  <target name="testout" depends="dist">
+	<java classname="cgat.dp.DPAlign" fork="yes" dir="${testdir}"
+			output="${testdir}/testout">
+	  <arg value="testseq"/>
+	  <classpath>
+		<pathelement location="${build}"/>
+	  </classpath>
+	</java>
+  </target>
+
+  <target name="doc" 
+        description="generate the documents" >
+    <!-- Create the document directory -->
+    <mkdir dir="${doc}"/>
+    <javadoc sourcepath="${src}" destdir="${doc}" packagenames="${package},${package}.seq"/>
+    <!--javadoc sourcepath="${src}" destdir="${doc}" packagenames="${package}.seq" -->
+  </target>
+
+  <target name="osx" depends="dist">
+    <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
+    <jarbundler dir="osx" name="AlignmentViewer"
+		mainclass="cgat.AlignmentViewer"
+		jar="dist/AlignmentViewer.jar"
+		icon="osx/CGAT.icns"
+		stubfile="osx/JavaApplicationStub"
+		jvmversion="1.4+"
+		vmoptions="-Xmx512m"
+	/>
+    <exec executable="tar" dir="osx">
+	<arg line="cvfz AlignmentViewer.app.tgz AlignmentViewer.app" />
+    </exec>
+    <copy file="osx/AlignmentViewer.app.tgz" todir="../htdocs/CGAT/dist"
+		preservelastmodified="true" />
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>

@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>CGAT: Comparative Genome Analysis Tool</TITLE>
+</HEAD>
+<BODY background="images/CGAT-bg.jpg">
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<!-- --> <HR>
+<!-- --> <H1>This page requires JavaScript.</H1>
+<!-- --> <HR>
+<!--
+function newWindow(url) {
+    window.open(url, "_blank", "width=1,height=1,resizable");
+}
+// -->
+
+</SCRIPT>
+
+<CENTER>
+<IMG SRC="images/CGATlogo.gif" ALT="CGAT">
+<br>
+<H2> A Comparative Genome Analysis Tool </H2>
+<br>
+</CENTER>
+<TABLE>
+<TR><TD>
+<B>CGAT</B> is a Comparative Genome Analysis Tool that was depeloped for
+detailed comparison of closely related bacterial-sized genomes.
+CGAT visualizes precomputed pairwise genome alignments
+on both dotplot and alignment viewers.  Users can put several
+information on this alignment, such as existence of tandem repeats
+or interspersed repetitive sequences and changes in codon usage bias,
+to facilitate interpretation of the observed genomic changes.
+Besides visualization functionalities,
+CGAT also provides a general framework to process genome-scale
+alignments using various existing alignment programs.
+CGAT employs a client-server architecture, which consists of
+<B>AlignmentViewer</B> (client; a Java application) and <B>DataServer</B>
+(a set of Perl scripts).  The DataServer package contains data construction
+scripts and CGI scripts and the AlignmentViewer program visualizes the
+alignment data obtained from the server thorough the HTTP protocol.
+
+<BLOCKQUOTE>
+<b> Reference</b><br>
+Uchiyama, I., Higuchi, T., Kobayashi, I.:
+CGAT: a comparative genome analysis tool for visualizing alignments in the analysis of complex evolutionary changes between closely related genomes. <br>
+<A HREF=http://www.biomedcentral.com/1471-2105/7/472/><i>BMC Bioinformatics</i> 2006, <b>7</b>:472</A>
+</BLOCKQUOTE>
+
+<TD>
+<IMG SRC="AlignmentViewer.jpg" height=300 width=478>
+</TABLE>
+
+<hr>
+
+<li> Invoke CGAT AlignmentViewer now
+<ul>
+<li> <A HREF=""" onClick="newWindow('AlignmentViewer.html');return(false);">
+Start the applet version of CGAT AlignmentViewer (a demo version)</A>
+<!--
+<li> <A HREF="dist/AlignmentViewer.jnlp">
+Download and run CGAT AlignmentViewer by Java Web Start</A>
+-->
+</ul>
+
+<li> Download the software
+<ul>
+<li> <A HREF="dist/AlignmentViewer.jar">The local install version of CGAT AlignmentViewer</A>
+/
+[ <A HREF="dist/AlignmentViewer.app.tgz">For Mac OSX</A> ]
+<li> <A HREF="dist/CGAT-1.1.0c.tgz">The full version of CGAT
+including the DataServer package and the source code of AlignmentViewer</A>
+</ul>
+
+<li> Documatations
+<ul>
+<li> <A HREF="manual/manual.html">CGAT manual (a single HTML file)</A>
+<li> <A HREF="manual/book1.html">CGAT manual (multiple HTML flles)</A>
+<li> <A HREF="manual/manual.ps">CGAT manual (PostScript)</A>
+</ul>
+
+<li> Examples
+<ul>
+<li> <A HREF="examples/Ex_kawai1.html">Insertions and duplications associated
+with a genome-wide inversion observed between
+<i>Neisseria meningitidis</i> Z2491 and MC58</A>
+<li> <A HREF="examples/Ex_kawai2.html">Identification of phage boundaries
+in
+<i>Neisseria meningitidis</i> Z2491 and <i>N. gonorrhoeae</i> FA1090 </A>
+</ul>
+
+<li>Links to the related sites:
+<ul>
+<li><A HREF="http://mbgd.genome.ad.jp/">MBGD: Microbial genome database for comparative analysis</A>
+<li><A HREF="http://mbgd.genome.ad.jp/domclust/">DomClust: Hierachical clustering program for orthologous grouping</A>
+</ul>
+
+<hr>
+
+Please send questions and comments to Ikuo Uchiyama
+(<A HREF="mailto:uchiyama@nibb.ac.jp">uchiyama@nibb.ac.jp</A>)
+
+</BODY>
+</HTML>

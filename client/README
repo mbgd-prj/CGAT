@@ -1,0 +1,6 @@
+You need Apache-Ant (http://ant.apache.org) to compile the programs.
+Type 'ant' to compile the programs.
+The Java binary code is created as dist/AlignmentViewer.jar
+
+If you are a Mac OSX user, type 'ant osx' to make an OSX application
+of the AlignmentViewer program (created as osx/AlignmentViewer.app).

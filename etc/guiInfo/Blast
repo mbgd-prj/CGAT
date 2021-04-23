@@ -1,0 +1,8 @@
+#CGI	/dynSearch/Blast.cgi
+label	Blast search
+text	cutoff evalue	evalue	1e-5	
+radio	program	program	blastn
+radio		program	tblastn
+radio		program	tblastx
+text	query name	queryname	query
+textarea	query sequence	queryseq		5	15

@@ -1,0 +1,20 @@
+
+/**
+ * タイトル:     cgat<p>
+ * @version 1.0
+ */
+package cgat;
+
+import java.awt.*;
+import javax.swing.*;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+public class BaseCanvas extends JComponent {
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public BaseCanvas() {
+        super();
+    }
+}

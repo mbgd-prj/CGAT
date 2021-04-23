@@ -1,0 +1,83 @@
+===========================================================
+    CGAT (Comparative Genome Analysis Tool)
+           The source code distribution
+===========================================================
+
+Reference:
+    Uchiyama, I., Higuchi, T., Kobayashi, I.
+    CGAT: a comparative genome analysis tool for visualizing alignments
+    in the analysis of complex evolutionary changes between closely
+    related genomes
+    BMC Bioinformatics (in press)
+
+Questions and comments should be sent to:
+    Ikuo Uchiyama (uchiyama@nibb.ac.jp)
+
+----------------------------------------
+Please see the project home page for the latest version:
+    http://mbgd.genome.ad.jp/CGAT/
+
+An online manual is available on this page.
+
+You can find the equivalent (but possibly older) information
+under this distribution at
+    htdocs/CGAT/index.html
+
+----------------------------------------
+   Quick Installation guide
+----------------------------------------
+
+Requirements:
+  You need at least Perl (5.8 or later), Java (1.4 or later), Ant
+  and NCBI BLAST 2.x.
+
+----------------------------------------
+   Quick guide for installation of the server package
+
+1) SetUp.pl
+   [confirm the CGAT_HOME directory and press the return key]
+2) source etc/cgat.csh
+
+----------------------------------------
+   Quick guide for web server setup
+
+1) ln -s $CGAT_HOME/htdocs/CGAT ~/public_html
+   (if you have a personal web page in the ~/public_html directory)
+   (In this case, the Server URL is "http://MACHINE_ADDR/~USERNAME/CGAT/")
+
+----------------------------------------
+   Quick guide for construction of the database
+
+1) Prepare your genome data, or skip this step if your sequences
+   are already in the MBGD database
+2) Edit etc/speclist to specify the pairs of genomes to be compared
+3) cd build
+   BuildAll.pl
+4) Release .pl
+
+----------------------------------------
+   Quick guide for compilation of the client program
+
+1) cd client
+2) ant
+3) Copy the dist/AlignmentViewer.jar file into an appropriate directory
+
+----------------------------------------
+   Quick guide for setup of the client program to use your local server
+
+1) java -Xmx512m -jar AlignmentViewer.jar
+2) File=>Properties
+3) Enter the server url (http://MACHINE_ADDR/~USERNAME/CGAT/ in the above
+   example) in the Server URL field, press 'Add' and press 'OK'.
+4) Select File=>Load and choose Server URL.
+
+----------------------------------------
+   Quick guide for setup of the client program to load data from the local file
+
+1) java -D$CGAT_HOME -Xmx512m -jar AlignmentViewer.jar
+2) File=>Properties
+3) Confirm the CGAT_HOME variable is correctly set.
+   Otherwise, enter the correct one.
+   Press 'OK'.
+4) Select File=>Load and choose alignment data that does not have a
+   '(Server)' statement.

@@ -1,0 +1,26 @@
+
+/**
+ * タイトル:     cgat<p>
+ * @version 1.0
+ */
+package cgat;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+public class BaseButton extends JButton implements ActionListener {
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public BaseButton(String n) {
+        super(n);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void actionPerformed(ActionEvent e) {
+    }
+}

@@ -1,0 +1,621 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Menu items </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" The CGAT AlignmentViewer program"
+HREF="c180.html"><LINK
+REL="PREVIOUS"
+TITLE=" The main window of AlignmentViewer"
+HREF="x225.html"><LINK
+REL="NEXT"
+TITLE=" Configuring AlignmentViewer "
+HREF="x524.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x225.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The CGAT AlignmentViewer program</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x524.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="MenuItems"
+></A
+>Menu items</H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="File"
+></A
+>File menu</H2
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="Load"
+></A
+>Load</H3
+><P
+>&#13;Load data from the specified server or the local file system.
+See the <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="c180.html#startAliView"
+><I
+>Starting AlignmentViewer</I
+></A
+>
+"</SPAN
+> section.
+	  </P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="Print"
+></A
+>Print</H3
+><P
+>&#13;Print out the image of the current alignment display.
+	  </P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="Properties"
+></A
+>Properties</H3
+><P
+>&#13;	Configure user property paramters.
+	See the <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="x524.html"
+><I
+>Configuring AlignmentViewer</I
+></A
+> "</SPAN
+> section.
+	</P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="Exit"
+></A
+>Exit</H3
+><P
+>&#13;Exit the program.
+This item appears only in the standalone application.
+For applet version, you must exit the web browser to exit the program.
+	  </P
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="Search"
+></A
+>Search menu</H2
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="MarkGenes"
+></A
+>Mark genes</H3
+><P
+>&#13;Mark a specified set of genes.
+	  </P
+><P
+>&#13;An input form is opened for users to enter a list of gene names to be
+marked. Gene names can be entered individually or be read from a file.
+By pressing the <B
+CLASS="guibutton"
+>Search</B
+> button, gene names are
+registered.  Locations of the registered genes are indicated
+on each axis of the dotplot display, and a new table window is
+opened containing the information of the these genes.
+	  </P
+><P
+>&#13;Additional calls of this function will add genes to the existing list.
+To remove genes from the list, enter the gene names to be removed and
+press <B
+CLASS="guibutton"
+>Clear</B
+>.
+To clear the entire list,  press <B
+CLASS="guibutton"
+>All Clear</B
+>.
+	  </P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN422"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/mark_genes.gif"></P
+></DIV
+><P
+><B
+>Figure 10.  Marking genes. Input form for entering genes (A) and the dotplot
+with genes marked with triangles on each axis (B)</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="FilterAlignment"
+></A
+>Filter Alignments</H3
+><P
+>&#13;Filtering out the alignments that do not satisfy the specified
+conditions. Alignments are filtered from both the alignment and dotplot
+displays.  A filter can be applied to one of the following fields:
+<P
+></P
+><UL
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Identity</B
+>: percentage identity; numeric.
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Score</B
+>: similarity score; numeric.
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Best Hit Status</B
+>:
+one of the following:
+3, orthologs (bidirectional best hits, BBH);
+2, duplicated only in the sequence-2;
+1, duplicated only in the sequnce-1;
+0, paralogs.
+</P
+></LI
+></UL
+>
+For specification of the numeric field conditions, see the next subsection
+<SPAN
+CLASS="QUOTE"
+>"<A
+HREF="x392.html#FilterSegment"
+><I
+>Filter Genes/Segments</I
+></A
+>
+"</SPAN
+>
+	  </P
+><P
+>&#13;Once filtered, a '*' mark is displayed on the left side of the alignment
+track (see <A
+HREF="x392.html#fig_filter_align"
+>Figure 11</A
+>C).
+Additional calls will add filters to the existing one.
+For example, users can specify conditions such as "Best Hit Status is BBH
+and Identity &#8805; 90%" by two successive calls of this function.
+To reset the filters, press the <B
+CLASS="guibutton"
+>Reset Alignment Filters</B
+>
+button.
+	  </P
+><DIV
+CLASS="figure"
+><A
+NAME="fig_filter_align"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/filter_alignment.gif"></P
+></DIV
+><P
+><B
+>Figure 11.  Filtering alignments. The filtering condition window (A), and
+alignment displays of before (B) and after (C) filtering (showing only BBH).
+</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="FilterSegment"
+></A
+>Filter Genes/Segments</H3
+><P
+>&#13;Filtering out the genes or feature segments that do not satisfy the
+specified conditions.  A filter can be applied to any field of any
+kind of segment that is currently loaded.
+	  </P
+><P
+>&#13;Kinds of conditions to be applied are different depending on
+the types of the fields (numeric and string).
+The following conditions are defined:
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Numeric field</DT
+><DD
+><P
+> Available conditions are:
+<B
+CLASS="guimenu"
+>Between</B
+> (a &#8804; x &#8804; b),
+<B
+CLASS="guimenu"
+>Except Between</B
+>(x &#60; a or b &#60; x),
+<B
+CLASS="guimenu"
+>Less Than</B
+> (x &#60; a),
+<B
+CLASS="guimenu"
+>Less Equal</B
+> (x &#8804; a),
+<B
+CLASS="guimenu"
+>Equal</B
+> (x = a),
+<B
+CLASS="guimenu"
+>Greater Equal</B
+> (x &#8805; a), and
+<B
+CLASS="guimenu"
+>Greater Than</B
+> (x &#62; a),
+where a and/or b are values to be specified.
+To specify <B
+CLASS="guimenu"
+>Between</B
+> or <B
+CLASS="guimenu"
+>Except Between</B
+>,
+two values should be separated by a comma (e.g. "80,90").
+</P
+></DD
+><DT
+>String field</DT
+><DD
+><P
+>&#13;	Available conditions are <B
+CLASS="guimenu"
+>Regex</B
+> (regular expression)
+	and  <B
+CLASS="guimenu"
+>Equal</B
+> (exact match).
+</P
+></DD
+></DL
+></DIV
+>
+	  </P
+><P
+>&#13;Once filtered, a '*' mark is displayed on the left side of the annotation track.
+Additional calls will add filters to the existing one.
+To reset the filter on the specified segment,
+choose the segment type and press the <B
+CLASS="guibutton"
+>Reset This Filter
+</B
+> button.
+To reset all filters, press the <B
+CLASS="guibutton"
+>Reset All Filters</B
+> button.
+	  </P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN481"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/filter_segments.gif"></P
+></DIV
+><P
+><B
+>Figure 12.  Filter genes/alignments </B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="DynamicSearch"
+></A
+>Dynamic Search</H3
+><P
+>&#13;Search each genome for specific segments or sets of segments
+dynamically, by calling a CGI script running on the server.
+Results will be displayed in the additional annotation tracks,
+or in the outermost pair of tracks (overwriting the existing data)
+if the maximum number of segment tracks have already been used.
+	  </P
+><P
+>&#13;Currently, the following programs are available:
+	  </P
+><P
+></P
+><UL
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Blast</B
+>: BLAST similarity search for a nucleotide
+[blastn(direct) / tblastx(translation)] or a protein [tblastn] query sequence.
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>PatSearch</B
+>: Regular expression pattern search. See
+the document of the
+<A
+HREF="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"
+TARGET="_top"
+>&#13;Java regex library</A
+>.
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>DirRep</B
+>: Direct repeat search.
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>SimpleRep</B
+>: Simple repeat (or short tandem repeat) search.
+</P
+></LI
+></UL
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="View"
+></A
+>View menu</H2
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="DataTable"
+></A
+>Gene/Segment Data Table</H3
+><P
+>&#13;Show table of genes or specified feature segment on the specified genome.
+In the table, each row contains species name, the beginning position,
+the ending position, strand direction, assigned color, and the name of
+the segment.
+Additional fields are added, if any, depending on the segment type.
+By clicking a row of this table, the current scope is reset such that
+the specified gene or segment is centered.
+	  </P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN511"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/genetable.gif"></P
+></DIV
+><P
+><B
+>Figure 13.  Gene table </B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="SequenceWindow"
+></A
+>Sequence Window</H3
+><P
+>&#13;Show nucleotide sequence of each genome within the current region.
+	  </P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="ExchangeGenomes"
+></A
+>Exchange Reference Genome</H3
+><P
+>&#13;Exchange the reference and the target sequences. Both the alignment and
+dotplot displays are changed.
+	  </P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x225.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x524.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The main window of AlignmentViewer</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c180.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Configuring AlignmentViewer</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

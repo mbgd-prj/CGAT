@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Web server set up </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" The CGAT DataServer package"
+HREF="c595.html"><LINK
+REL="PREVIOUS"
+TITLE=" Database construction "
+HREF="x678.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x678.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The CGAT DataServer package</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+>&nbsp;</TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN796"
+></A
+>Web server set up</H1
+><P
+>&#13;<TT
+CLASS="application"
+>AlignmentViewer</TT
+> can directly access the resulting
+data file locally when the environmental variable <TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>
+is correctly set. Therefore you can skip this section if you intend to
+use AlignmentViewer only on the machine on which the database was
+constructed.
+On the other hand, if you want to allow access to the database from
+various machines through the Internet, you must set up a web
+server on the server machine.
+      </P
+><P
+>&#13;If there is already a HTTP server running on the server, the simplest way
+to add the CGAT service to the existing server is to create a symbolic link
+to <TT
+CLASS="filename"
+>$CGAT_HOME/htdocs/CGAT</TT
+> on a web site directory.
+For example, if you have a <TT
+CLASS="filename"
+>public_html</TT
+> directory
+on your home directory as your own homepage, you can add CGAT service
+to this page by creating the above symbolic link on this directory:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;ln -s $CGAT_HOME/htdocs/CGAT ~/public_html
+</PRE
+></TD
+></TR
+></TABLE
+>
+In this case, the URL for accessing the CGAT service is
+<TT
+CLASS="filename"
+>http://YOUR_MACHINE_ADDRESS/~YOUR_USER_NAME/CGAT/</TT
+>,
+where YOUR_MACHINE_ADDRESS and YOUR_USER_NAME should be replaced with
+appropriate names. 
+If you are a Mac OSX user, you must have a <TT
+CLASS="filename"
+>Sites</TT
+> 
+instead of <TT
+CLASS="filename"
+>public_html</TT
+> directory on your home directory
+as your own home page.
+      </P
+><P
+>&#13;Next you must edit the <TT
+CLASS="filename"
+>httpd.conf</TT
+> file to modify
+the server setting.
+
+The location of the <TT
+CLASS="filename"
+>httpd.conf</TT
+> file is system
+dependent; on Mac OSX, user specific configuration can be described
+in a separate file,
+<TT
+CLASS="filename"
+>/private/etc/apache2/users/USERNAME.conf</TT
+> (for 10.5) or
+<TT
+CLASS="filename"
+>/etc/httpd/users/USERNAME.conf</TT
+> (for 10.4),
+where USERNAME should be replaced with your username.
+
+In any way, this step usually requires administrator
+privilege. Please ask an administrator of the machine if you do not
+have the privilege.
+    </P
+><P
+>&#13;The following is a configuration required for the above example
+where the server is located on the public_html directory:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;
+&#60;Directory /PATH_TO_YOUR_HOME_DIRECTORY/public_html&#62;
+    Options ExecCGI FollowSymLinks
+    AddHandler cgi-script .cgi
+    SetEnv CGAT_HOME /PATH_TO_CGAT_HOME
+    SetEnv PERLLIB /PATH_TO_CGAT_HOME/perllib/
+&#60;/Directory&#62;
+
+</PRE
+></TD
+></TR
+></TABLE
+>
+where /PATH_TO_YOUR_HOME_DIRECTORY and /PATH_TO_CGAT_HOME should
+be replaced with the absolute paths of the respective directories.
+    </P
+><P
+>&#13;Possibly, you may need to load some additional Apache modules.
+For example, the above setting contains the SetEnv directive which
+requires the mod_env module. If this module is not loaded in the default
+setting, you must add the following line to the
+<TT
+CLASS="filename"
+>httpd.conf</TT
+> file.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;LoadModule env_module         MODULE_PATH/mod_env.so
+</PRE
+></TD
+></TR
+></TABLE
+>
+where MODULE_PATH should be replaced with a system dependent module path
+(please ask your administrator).
+      </P
+><P
+>&#13;Please remember that you must restart the HTTP server to reflect
+the change after you modify the <TT
+CLASS="filename"
+>httpd.conf</TT
+> file.
+Typically, this can be done by the command <TT
+CLASS="userinput"
+><B
+>apachectl restart
+</B
+></TT
+>.
+Mac OSX users can turn on/off the HTTP server by turning on/off,
+respectively, the "Personal Web Sharing" service in the Sharing pane
+opened through <B
+CLASS="guimenu"
+>Apple menu &#8658; System preference &#8658;
+Sharing</B
+>.
+    </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x678.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Database construction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c595.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>&nbsp;</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

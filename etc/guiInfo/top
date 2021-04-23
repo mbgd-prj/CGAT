@@ -1,0 +1,6 @@
+#CGI	/dynSearch/getGuiInfo.cgi
+label	Select a program to run
+radio	 	type	Blast
+radio	 	type	PatSearch
+radio	 	type	DirRep
+radio	 	type	SimpleRep

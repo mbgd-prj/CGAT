@@ -1,0 +1,650 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Database construction </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" The CGAT DataServer package"
+HREF="c591.html"><LINK
+REL="PREVIOUS"
+TITLE=" The CGAT DataServer package"
+HREF="c591.html"><LINK
+REL="NEXT"
+TITLE=" Web server set up "
+HREF="x787.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c591.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The CGAT DataServer package</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x787.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN674"
+></A
+>Database construction</H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="databuild"
+></A
+>Overview of the data construction procedure</H2
+><P
+>&#13;Essentially, the data construction process consists of the following steps:
+     <P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>&#13;Prepare your genomic sequence data. If your sequences are already
+in the <A
+HREF="http://mbgd.genome.ad.jp/"
+TARGET="_top"
+>MBGD</A
+>
+database, you can skip this step, because
+the procedure will automatically try to download missing data from MBGD.
+</P
+></LI
+><LI
+><P
+>&#13;Edit <TT
+CLASS="filename"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/etc/speclist</TT
+>
+to specify a set of species to be analyzed and a set of
+programs to be executed for each species set.
+</P
+></LI
+><LI
+><P
+>&#13;Run <B
+CLASS="command"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/build/BuildAll.pl</B
+>.
+This script executes all procedures for building the database according
+to the <TT
+CLASS="filename"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/etc/speclist</TT
+> file,
+and eventually constructs data on the <TT
+CLASS="filename"
+>&#13;<TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/database.work</TT
+> directory.
+</P
+></LI
+><LI
+><P
+>&#13;Run <B
+CLASS="command"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/build/Release.pl</B
+> to
+release the data from the <TT
+CLASS="filename"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/database.work
+</TT
+> directory to the <TT
+CLASS="filename"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/database
+</TT
+> directory.
+</P
+></LI
+></OL
+>
+    </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="prepareData"
+></A
+>Preparing genomic sequences</H2
+><P
+>&#13;Before running programs, you must prepare genome sequences data.
+There are three possible ways.
+<P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>&#13;If your sequences are already in the
+<A
+HREF="http://mbgd.genome.ad.jp/"
+TARGET="_top"
+>MBGD</A
+> database,
+the simplest way to prepare data is to remember the abbreviated names of those
+genomes in the MBGD database (e.g. 'eco' for
+<I
+CLASS="emphasis"
+>Escherichi coli</I
+> K12).
+and use these names in the configuration table described
+in the next section.  The build procedure automatically
+try to download missing data from MBGD.
+Note that the sequence name specified here is used throughout the system 
+(hereafter we call it <TT
+CLASS="varname"
+>SPNAME</TT
+>).
+</P
+></LI
+><LI
+><P
+>&#13;Alternatively, if you have genomic data in GenBank format, you can use the
+<TT
+CLASS="filename"
+><TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>/build/getDataFromGenBank.pl</TT
+>
+script to convert it to the CGAT database.
+The syntax of the command is
+<P
+><B
+CLASS="command"
+>getDataFromGenBank.pl</B
+>  <TT
+CLASS="replaceable"
+><I
+>GBK_FILE</I
+></TT
+>   <TT
+CLASS="replaceable"
+><I
+>SPNAME</I
+></TT
+> </P
+>
+For example:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;getDataFromGenBank.pl NC00913.gbk eco
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></LI
+><LI
+><P
+>&#13;Otherwise, you must prepare data by yourself. The data you should prepare
+are as follows:
+<P
+></P
+><UL
+><LI
+><P
+>&#13;<TT
+CLASS="filename"
+>$CGAT_HOME/database/genomes/SPNAME</TT
+>:
+a genomics sequence in fasta format.
+</P
+></LI
+><LI
+><P
+>&#13;<TT
+CLASS="filename"
+>$CGAT_HOME/database/genes/aa/SPNAME</TT
+>:
+translated sequences of genes in fasta format
+(optional; if you want to calculate attribute values associated with
+protein sequences).
+</P
+></LI
+><LI
+><P
+>&#13;<TT
+CLASS="filename"
+>$CGAT_HOME/database/genes/nt/SPNAME</TT
+>:
+nucleotide sequences of genes in fasta format
+(optional; if you want to calculate attribute values associated with
+nucleotide sequences).
+</P
+></LI
+><LI
+><P
+>&#13;<TT
+CLASS="filename"
+>$CGAT_HOME/database/genes/tab/SPNAME</TT
+>:
+a tab-delimited table of genes
+containing the following information:
+the name of genomics sequence, beginning position, ending position,
+direction (1/-1), color code (= function category code; optional),
+the name of the gene, and the name of the product (optional).
+The beginning position must be smaller than the ending position
+even for the gene on the reverse chain.
+The file must begin with a header line containing a tab-delimited list of
+field names as follows,
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;#sp	from	to	dir	color	name	product
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></LI
+></UL
+>
+</P
+></LI
+></OL
+>
+      </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="configBuild"
+></A
+>Configuring database building procedure</H2
+><P
+>&#13;Next, you must prepare <TT
+CLASS="filename"
+>$CGAT_HOME/etc/speclist</TT
+> file,
+which contains information required for the database building procedure.
+The following information should be specified in this file:
+<P
+></P
+><UL
+><LI
+><P
+>&#13;A set of genomic sequences to be compared. If more than two species are
+specified, all-against-all pairwise comparison will be performed.
+Note that currently CGAT can handle only pairwise comparisons.
+</P
+></LI
+><LI
+><P
+>&#13;A set of programs to be executed for each sequence set.
+</P
+></LI
+></UL
+>
+</P
+><P
+>&#13;The <TT
+CLASS="filename"
+>speclist</TT
+> file consists of macro definition and
+dataset definition sections, where macro definition must precede the
+dataset definition.  Syntax of the definition of macro variable is
+as follows:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="synopsis"
+>&#13;SET <TT
+CLASS="varname"
+>varname</TT
+> = <TT
+CLASS="varname"
+>value</TT
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+A dollar sign followed by variable name, e.g. $varname, causes a
+variable substitution, as usual.
+</P
+><P
+>&#13;The dataset definition section is a tab-delimited table, containing the
+following fields: <TT
+CLASS="varname"
+>SPNAME_LIST</TT
+>,
+<TT
+CLASS="varname"
+>PROGRAM_LIST</TT
+>,<TT
+CLASS="varname"
+>FLAG_UPDATE</TT
+>,
+and <TT
+CLASS="varname"
+>FLAG_PUBLIC</TT
+>.
+
+<TT
+CLASS="varname"
+>SPNAME_LIST</TT
+> is a comma-delimited list specifying
+a set of species to be compared.
+
+<TT
+CLASS="varname"
+>PROGRAM_LIST</TT
+> is a space-delimited list specifying
+script files to be executed for each species set. The file names
+are relative to the <TT
+CLASS="filename"
+>$CGAT_HOME/build</TT
+> directory
+and the wildcard characters such as '*' can be used. For example,
+<TT
+CLASS="filename"
+>align/*</TT
+> specifies all (executable) files under the
+<TT
+CLASS="filename"
+>$CGAT_HOME/build/align</TT
+> directory. 
+
+<TT
+CLASS="varname"
+>FLAG_UPDATE</TT
+> and <TT
+CLASS="varname"
+>FLAG_PUBLIC</TT
+>
+are flags specifying the data should be updated and the data should be
+open to the public (through the CGI script), respectively.
+The value should be 1 (yes) or 0 (no). Default value is 1.
+	</P
+><P
+>&#13;The following is an example of the <TT
+CLASS="filename"
+>speclist</TT
+> file.
+The file directs the build script to compare genome sequences
+"hpy" and "hpj" by executing all programs for identifying
+feature segments in the <TT
+CLASS="filename"
+>$CGAT_HOME/build/segment</TT
+>
+directory, followed by all programs for calculating gene attribute values
+in the <TT
+CLASS="filename"
+>$CGAT_HOME/build/geneattr</TT
+> directory,
+followed by all programs for calculating alignment between the two genomes
+n the <TT
+CLASS="filename"
+>$CGAT_HOME/build/align</TT
+> directory.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;####################
+# macro definition
+####################
+SET AlignAll = align/*
+SET SegmentAll = segment/* geneattr/*
+####################
+# dataset definition
+####################
+hpy,hpj	$SegmentAll $AlignAll
+</PRE
+></TD
+></TR
+></TABLE
+>
+       </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="startBuild"
+></A
+>Start building</H2
+><P
+>&#13;Run <B
+CLASS="command"
+>BuildAll.pl</B
+> under the <TT
+CLASS="filename"
+>$CGAT_HOME/build</TT
+>
+directory to execute building procedures. This script creates
+<TT
+CLASS="filename"
+>$CGAT_HOME/work</TT
+> directory if not exists, and move
+to this directory, and then executes programs that have been specified in
+the <TT
+CLASS="filename"
+>$CGAT_HOME/etc/speclist</TT
+> file in the previous
+section.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;BuildAll.pl
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="releaseData"
+></A
+>Release data</H2
+><P
+>&#13;Before accessing the created database, you must run
+<B
+CLASS="command"
+>Release.pl</B
+> under the <TT
+CLASS="filename"
+>$CGAT_HOME/build</TT
+>
+ directory to release the data from the <TT
+CLASS="filename"
+>$CGAT_HOME/database.work
+</TT
+> directory to the <TT
+CLASS="filename"
+>$CGAT_HOME/database
+</TT
+> directory.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Release.pl
+</PRE
+></TD
+></TR
+></TABLE
+>
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c591.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x787.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The CGAT DataServer package</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c591.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Web server set up</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

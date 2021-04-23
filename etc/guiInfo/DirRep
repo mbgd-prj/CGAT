@@ -1,0 +1,8 @@
+#CGI	/dynSearch/DirRep.cgi
+label	Direct Repeat Search
+text	maximum distance	maxdiff	5000
+text	minimum distance	mindiff	10
+text	mismatch num	mismatch	5
+text	minimum match length	minmatchlen	30
+text	mismatch ratio	misratio	0.15
+text	cutoff probability	cutoff_prob	

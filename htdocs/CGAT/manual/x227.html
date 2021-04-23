@@ -1,0 +1,678 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> The main window of AlignmentViewer</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" The CGAT AlignmentViewer program"
+HREF="c182.html"><LINK
+REL="PREVIOUS"
+TITLE=" The CGAT AlignmentViewer program"
+HREF="c182.html"><LINK
+REL="NEXT"
+TITLE=" Menu items "
+HREF="x396.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c182.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The CGAT AlignmentViewer program</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x396.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="main"
+></A
+>The main window of AlignmentViewer</H1
+><P
+>&#13;The main window of AlignmentViewer consists of four parts: a menu bar,
+a control panel, an alignment display panel, and a dotplot display panel.
+Both the alignment and dotplot displays show precomputed alignments.
+Users can change the current view on each display by pressing a scrolling
+or zooming button on the control panel. These operations update both
+the alignment and dotplot displays in a coherent manner.
+	</P
+><P
+>&#13;In AlignmentViewer, one of the compared sequences is considered as
+the reference sequence and the other is considered as the
+target sequence.
+In the alignment display panel, the reference and the target sequences
+are displayed on the upper and lower tracks, respectively,
+and in the dotplot display panel, the reference and the target
+sequences  correspond to the x- and y-axes, respectively.
+These sequences can be exchanged by <B
+CLASS="guimenu"
+>View</B
+>
+&#8658; <B
+CLASS="guimenu"
+>Exchange Reference Genome</B
+>.
+
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN233"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/mainwindow.gif"></P
+></DIV
+><P
+><B
+>Figure 2.  Main window of AlignmentViewer</B
+></P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="control_panel"
+></A
+>Control panel</H2
+><P
+>&#13;	The control panel contains several buttons for controlling the current
+	view of both the alignment and dotplot displays.
+
+<DIV
+CLASS="figure"
+><A
+NAME="AEN243"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/controlpanel.gif"></P
+></DIV
+><P
+><B
+>Figure 3.  Control panel </B
+></P
+></DIV
+>
+
+<P
+></P
+><DIV
+CLASS="variablelist"
+><DL
+><DT
+>Move left/right</DT
+><DD
+><P
+>&#13;Move the current position to the left or right along the current alignment.
+</P
+></DD
+><DT
+>Zoom in/out</DT
+><DD
+><P
+>&#13;Zoom-in or -out the current view.
+</P
+></DD
+><DT
+>Alignment color</DT
+><DD
+><P
+>&#13;Toggle the alignment color mode between the "Best Hit" mode and
+the "Identity" mode.
+	<P
+></P
+><UL
+><LI
+><P
+>&#13;	Best Hit: white, orthologs; cyan, duplicated on the sequence 1;
+	green, duplicated on the sequence 2; and blue, paralogs (by default).
+	</P
+></LI
+><LI
+><P
+>&#13;	Identity: red, 50%; yellow, 85%; and green, 100% (by default).
+	</P
+></LI
+></UL
+>
+</P
+></DD
+><DT
+>Alignment mode</DT
+><DD
+><P
+>&#13;Toggle the alignment mode between the "Regionwise" alignment mode and
+the "Reference-target" alignment mode.
+See the section <SPAN
+CLASS="QUOTE"
+>"
+<A
+HREF="x227.html#alignmentDisplay"
+><I
+>Alignment display panel</I
+></A
+> "</SPAN
+>.
+</P
+></DD
+><DT
+>Exchange ref-target</DT
+><DD
+><P
+>&#13;Exchange the reference sequence and the target sequence.
+</P
+></DD
+><DT
+>Display dotplot</DT
+><DD
+><P
+>&#13;Toggle the status of the dotplot display panel between displayed and hidden.
+</P
+></DD
+><DT
+>Zoom in/out dotplot</DT
+><DD
+><P
+>&#13;Zoom-in or -out the dotplot display.
+</P
+></DD
+><DT
+>Zoomed axis</DT
+><DD
+><P
+>&#13;Specify the axis of the dotplot to be zoomed individually.
+</P
+></DD
+><DT
+>Change background</DT
+><DD
+><P
+>&#13;Toggle the background color of the alignment and dotplot displays
+between the dark color (black by default) and the light color
+(white by default).
+</P
+></DD
+><DT
+>Show annotation table</DT
+><DD
+><P
+>&#13;Show an annotation table for information on gene or feature segment.
+</P
+></DD
+></DL
+></DIV
+>
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN298"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/alignment_color.gif"></P
+></DIV
+><P
+><B
+>Figure 4. Alignment color modes. The Best-Hit mode (A),
+and the Identity mode (B)</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="alignmentDisplay"
+></A
+>Alignment display panel</H2
+><P
+>&#13;The alignment display panel contains three basic tracks: the central
+tracks (alignment track) shows a graphical representation of the
+alignments, and the upper and lower tracks (gene annotation tracks) show
+the gene annotation of the upper and lower genomes, respectively.
+More annotation tracks can be added to display the location of
+several feature segments.
+	</P
+><P
+>&#13;In addition, the "location fields" and the "strand switches" are on the left
+side of the tracks.
+The location field indicates the central coordinate of the current view,
+and strand switch indicates the strand of each genome currently selected.
+Users can jump to the desired location by entering a coordinate value
+or a gene identifier (e.g. HP0812) in the location field, and can toggle
+the strand direction by pressing the strand switch.
+	</P
+><P
+>&#13;Some notes: 1) You must always enter the location of the reference genome
+if you want to see the orthologous alignment around the specified locus.
+If you want to specify the location in the current target genome,
+you should exchanges the reference and the target genomes before
+entering the position; 2) If you invert the reference genome by the
+strand switch button, the direction of the subsequent movement is also
+inverted. This means that when you press the 'move left' button,
+the cursor in the dotplot display will move right, since the coordinate
+of the dotplot display is not changed by this operation.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN310"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/alignment_display.gif"></P
+></DIV
+><P
+><B
+>Figure 5.  Alignment display panel</B
+></P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="AEN317"
+></A
+>Alignment modes</H3
+><P
+>&#13;In CGAT, there are two modes in the alignment display:
+"regionwise" alignment mode and "reference-target" alignment mode.
+
+In the regionwise alignment mode, all alignments included in the current view
+are displayed. Each alignment is represented as a trapezoid formed by
+connecting the corresponding endpoints of the aligned region.
+
+On the other hand, in the reference-target alignment mode, every
+orthologous regions of the target sequence is mappend as a fragment
+onto the reference sequence.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN320"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/alignment_mode.gif"></P
+></DIV
+><P
+><B
+>Figure 6.  The two alignment modes: the regionwise mode (A) and
+the reference-target mode (B). </B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="AEN327"
+></A
+>Alignment track</H3
+><P
+>&#13;The alignment track displays precomputed alignments schematically.
+Using the zooming buttons in the control panel, users can change
+the scale from the entire genome level to the single nucleotide
+level. In the nucleotide sequence alignment, mismatched site is colored
+red and gapped site is colored green (by default).
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN330"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/zoom_alignment.gif"></P
+></DIV
+><P
+><B
+>Figure 7.  Zooming the alignment display </B
+></P
+></DIV
+><P
+>&#13;In the regionwise alignment mode, left click on one of the alignment
+regions (tetragons) sets the center of the selected alignment adjusted to
+the center of the display.
+	</P
+><P
+>&#13;By right click on the alignment track, a pop-up menu appears including
+the following items:
+<P
+></P
+><UL
+><LI
+><P
+> <B
+CLASS="guimenu"
+>View Re-Alignment</B
+>:
+	Re-calculate alignment between the sequences within the current
+	displayed region. This item appears only when the current
+	displayed region is smaller than the specified length
+	(Size of Realignment).
+	See the <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="x528.html"
+><I
+>Configuring AlignmentViewer</I
+></A
+>"</SPAN
+> section.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>View Alignment</B
+>:
+	Display the precomputed alignment under the clicked position.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Ident = ## %</B
+>:
+	No action. The item is displayed only for showing the percent
+	identity of the precomputed alignment under the clicked position.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Color Legend</B
+>:
+	Display the color legend for the current alignment display.
+</P
+></LI
+></UL
+>
+	</P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="AEN354"
+></A
+>Annotation track</H3
+><P
+>&#13;The annotation track displays several types of feature segments
+identified in each genome. 
+	</P
+><P
+>&#13;By left click on one of the feature segments in the annotation track,
+a pop-up menu appears:
+<P
+></P
+><UL
+><LI
+><P
+> <TT
+CLASS="varname"
+>SegmentName</TT
+>:
+	Open the web browser to access the web site,
+	if an appropriate URL is defined on the server.
+	Otherwise, no action is taken.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>View Sequence: ## - ##</B
+>:
+	Show the nucleotide sequence of the feature segment.
+</P
+></LI
+></UL
+>
+
+By right click on the annotation track, another pop-up menu appears:
+
+<P
+></P
+><UL
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Clicked Pos: ## </B
+>:
+	No action. The item is displayed only for showing the clicked position.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Redraw (Set Center=##) </B
+>:
+	Move the clicked position to the center of the display window.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Search Alignment ## - ## </B
+>:
+	Search the set of precomputed alignments for those covering
+	the region around the clicked position.
+</P
+></LI
+><LI
+><P
+> <B
+CLASS="guimenu"
+>Color Legend</B
+>:
+	Display the color legend for the current annotation display.
+</P
+></LI
+></UL
+>
+
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="dotplot"
+></A
+>Dotplot display panel</H2
+><P
+>&#13;In the dotplot display panel, all alignments are plotted onto
+the 2-dimensional space with the horizontal (X) and the vertical (Y)
+axes representing the reference and the target sequences, respectively.
+In this plot, the current scope, i.e. the region displayed in the alignment
+display, is also shown as a rectangular region.
+Users can move the current scope by clicking on any points in the plot
+to move.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN381"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/dotplot_display.gif"></P
+></DIV
+><P
+><B
+>Figure 8.  Dotplot display panel </B
+></P
+></DIV
+><P
+>&#13;In the dotplot display, independent scaling of the x-axis and y-axis
+is possible. This feature is useful in visualizing the distribution
+of homologous regions of a specific segment on one genome against
+the entirety of the other genome.
+In the following example, dotplot with expanded y-axis scale
+clarifies the presence of inverted duplication at both ends
+of the rearranged segment on the reference genome (x-axis).
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN389"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/dotplot_zoom_y.gif"></P
+></DIV
+><P
+><B
+>Figure 9.  Dotplot display comparing the entire genomes (A) and
+	dotplot display with expanded y-axis scale</B
+></P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c182.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x396.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>The CGAT AlignmentViewer program</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c182.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Menu items</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

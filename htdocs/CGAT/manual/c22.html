@@ -1,0 +1,358 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Installing CGAT </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE=" What is CGAT ? "
+HREF="c15.html"><LINK
+REL="NEXT"
+TITLE=" Download "
+HREF="x81.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c15.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x81.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="install"
+></A
+> Installing CGAT </H1
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN24"
+></A
+>Requirements</H1
+><P
+>&#13;<TT
+CLASS="application"
+>AlignmentViewer</TT
+> is written in Java and
+should run on any machine supporting
+<A
+HREF="http://www.java.com"
+TARGET="_top"
+>Java</A
+> (JDK 1.4 or higher).
+      </P
+><P
+>&#13;<TT
+CLASS="application"
+>DataServer</TT
+> is a set of Perl scripts
+and assumes Unix environment with <A
+HREF="http://www.perl.com"
+TARGET="_top"
+>Perl</A
+>
+installed (version 5.8 or higher). It also assumes that the perl executable
+is installed in the <TT
+CLASS="filename"
+>/usr/bin</TT
+> directory; please make
+a symbolic link if it is located in a different directory.
+The LWP (libwww-perl) module, which is downloadable from
+<A
+HREF="http://www.cpan.org"
+TARGET="_top"
+>the CPAN site</A
+>,
+is also required when you want to download data from the MBGD server.
+DataServer also needs an HTTPD server for communicating with
+the client program. In this manual, we assume that
+<A
+HREF="http://httpd.apache.org"
+TARGET="_top"
+>Apache HTTPD</A
+> version 2.0 or
+more is installed on your server machine.
+      </P
+><P
+>&#13;CGAT uses several programs for calculating alignments of two sequences
+and identifying several feature segments on individual sequences.
+Currently the following programs are supported:
+      </P
+><DIV
+CLASS="table"
+><A
+NAME="AEN36"
+></A
+><P
+><B
+>Table 1.  Alignment programs currently supported by CGAT </B
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>program</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>URL</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> Blast/MegaBlast </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://www.ncbi.nlm.nih.gov/BLAST/"
+TARGET="_top"
+>http://www.ncbi.nlm.nih.gov/BLAST/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> Fasta</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://fasta.bioch.virginia.edu/"
+TARGET="_top"
+>http://fasta.bioch.virginia.edu/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> MUMmer</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://mummer.sourceforge.net/"
+TARGET="_top"
+>http://mummer.sourceforge.net/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> Blat/WABA </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://www.cse.ucsc.edu/~kent"
+TARGET="_top"
+>http://www.cse.ucsc.edu/~kent</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> BlastZ</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://www.bx.psu.edu/miller_lab/"
+TARGET="_top"
+>http://www.bx.psu.edu/miller_lab/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> PatternHunter </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://www.bioinformaticssolutions.com/products/ph/"
+TARGET="_top"
+>http://www.bioinformaticssolutions.com/products/ph/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> CHAOS </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://lagan.stanford.edu/lagan_web/index.shtml"
+TARGET="_top"
+>http://lagan.stanford.edu/lagan_web/index.shtml</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> GAME </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://cancer.informatics.indiana.edu/game/"
+TARGET="_top"
+>http://cancer.informatics.indiana.edu/game/</A
+> </TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> SSAHA </TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+> <A
+HREF="http://www.sanger.ac.uk/Software/analysis/SSAHA/"
+TARGET="_top"
+>http://www.sanger.ac.uk/Software/analysis/SSAHA/</A
+> </TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>&#13;You should install one or more of the above programs on the server machine
+before installing the CGAT DataServer.  Please refer to the above URL for
+installing individual programs.  Basically, the DataServer assumes
+at least the NCBI Blast/MegaBlast package is installed.
+      </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c15.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x81.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>What is CGAT ?</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Download</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

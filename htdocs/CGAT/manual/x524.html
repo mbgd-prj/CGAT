@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Configuring AlignmentViewer </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" The CGAT AlignmentViewer program"
+HREF="c180.html"><LINK
+REL="PREVIOUS"
+TITLE=" Menu items "
+HREF="x392.html"><LINK
+REL="NEXT"
+TITLE=" The CGAT DataServer package"
+HREF="c591.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x392.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>The CGAT AlignmentViewer program</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c591.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="configAlignViewer"
+></A
+>Configuring AlignmentViewer</H1
+><P
+>&#13;Many properties of AlignmentViewer can be configured through property
+parameters.  These parameters can be changed on the properties window
+(<B
+CLASS="guimenu"
+>File &#8658; Properties</B
+>). Configured properties
+are saved in the user home directory.
+	</P
+><P
+>&#13;In the properties window, the properties are categorized into the following
+four sections.
+
+<P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Locations</B
+>: Locations of data to be loaded.
+See <SPAN
+CLASS="QUOTE"
+>"<A
+HREF="c180.html#loadData"
+><I
+>Load data</I
+></A
+> "</SPAN
+>
+for loading data.
+	<P
+></P
+><UL
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>CGAT_HOME</B
+>:
+	The server home directory containing the database.
+	You can load data from the local file system,
+	only when the CGAT database is installed in a directory
+	accessible from the AlignmentViewer.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Server URL</B
+>:
+	Addresses of the CGAT servers. Multiple servers can be specified.
+	You can choose which server to use when you load the data.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Proxy URL</B
+>:
+	Specify if your organization uses a proxy server.
+	Please ask your network administrator.
+	</P
+></LI
+></UL
+>
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Color</B
+>: Color preferences.
+You can set two different sets of colors for the dark and light
+background color modes.
+	<P
+></P
+><UL
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Background</B
+>:
+	The background color of both the alignment track and
+	the dotplot display.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Viewing Frame</B
+>:
+	The color of the frame indicating the current scope in the dotplot
+	display.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Match/Mismatch/Gap</B
+>:
+	Colors for displaying nucleotide sequence alignments in the
+	annotation track.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Identity</B
+>:
+	Colors for drawing alignment regions according to the percentage
+	identities (the identity color mode). Colors of the three points
+	(highest, middle, and lowest percentages) can be specified, and
+	the others are interpolated between these colors.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Gene Attribute</B
+>:
+	Colors for drawing genes in the annotation tracks using gene
+	attribute values.  Colors of the highest and lowest values can
+	be specified, and the remaining values are interpolated between them.
+	</P
+></LI
+></UL
+>
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Panel</B
+>: Hight of the tracks and the maximum number of tracks.
+	<P
+></P
+><UL
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Maximum # of Segment Tracks</B
+>:
+	Maximum number of feature segments to be loaded. Possibly,
+	the height of the tracks should also be modified (lowered)
+	to display all the information within the screen when you
+	want to increase the number of segment tracks.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Height of Alignment/Gene/Segment Area</B
+>:
+	Hight of the tracks in the alignment display can be set individually
+	for the alignment track, the gene annotation tracks and the
+	feature segment tracks.
+	</P
+></LI
+></UL
+>
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="guimenu"
+>Alignment</B
+>: Alignment parameters.
+	<P
+></P
+><UL
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Match/Mismatch/Open Gap/Extension Gap</B
+>:
+	The scoring system for dynamically calculating alignments
+	in the AlignmentViewer program.
+	</P
+></LI
+><LI
+><P
+>&#13;	<B
+CLASS="guimenu"
+>Size of Realignment</B
+>:
+	Maximum length of the displayed region (scope) within which the
+	re-alignment of the sequences is allowed by right click on the
+	alignment track.
+	</P
+></LI
+></UL
+>
+</P
+></LI
+></OL
+>
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="AEN584"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/prop_locations.gif"></P
+></DIV
+><P
+><B
+>Figure 14. Properties window</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x392.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c591.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Menu items</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c180.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The CGAT DataServer package</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

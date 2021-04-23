@@ -1,0 +1,43 @@
+#########################################################
+## speclist
+##
+#########################################################
+## Macro definitions
+## Syntax:
+##    SET varname = value,value,... 
+##      where value should be a script file name under the build directory.
+#########################################################
+SET All = $SegmentAll $AlignAll
+SET AlignAll = align/*
+SET SegmentAll = segment/* geneattr/*
+SET StrongSim = align/{Blast,MegaBlast,Mummer,Blat,Ssaha2}
+SET WeakSim = align/{Fasta,BlastZ,Promer,Game,Waba}
+SET Default = $All
+SET Strong = $SegmentAll $StrongSim
+#SET Weak = $SegmentAll $WeakSim
+SET Weak = $SegmentAll align/LastZ
+SET Strong = $SegmentAll align/Blast
+#########################################################
+## Set of speices to be compared
+##   each line should be tab-delimited and contain the
+##   following fields:
+##	set_of_species -- comma-delimited species list.
+##	program_set -- comma-delimited program list, macro can be used.
+##	flag_update -- 1/0 for doing/skipping update (default: 1)
+##	flag_public -- 1/0 for making data visible/inivisible (default: 1)
+#########################################################
+## The following data were used in the CGAT paper
+#########################################################
+hpy,hpj	$All	1	1
+eco,ecs	$All	1	1
+eco,sty	$All	1	1
+bsu,gka	$All	1	1
+#########################################################
+## Additional examples
+#########################################################
+#pho,pab	$Weak	1	1
+#mge,mpn	$Weak	1	1
+#sau,sav	$Strong	1	1
+#mtu,mle	$Weak	1	1
+#buc,bab,bas	$Weak	1	1
+#nme,nma,ngo	$Strong	1	1

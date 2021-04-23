@@ -1,0 +1,505 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+> Install </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE=" CGAT User Manual "
+HREF="book1.html"><LINK
+REL="UP"
+TITLE=" Installing CGAT "
+HREF="c20.html"><LINK
+REL="PREVIOUS"
+TITLE=" Download "
+HREF="x79.html"><LINK
+REL="NEXT"
+TITLE=" The CGAT AlignmentViewer program"
+HREF="c180.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>CGAT User Manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x79.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Installing CGAT</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c180.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN99"
+></A
+>Install</H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN101"
+></A
+>AlignmentViewer</H2
+><P
+>&#13;	Basically, you need not particular operation after having downloaded
+	the program file (<TT
+CLASS="filename"
+>AlignmentViewer.jar</TT
+>) &#8212;
+	double click the icon (OSX or Windows) or type the java command
+	(Unix) to invoke the program. See the chapter
+	<SPAN
+CLASS="QUOTE"
+>"
+	<A
+HREF="c180.html"
+><I
+>The CGAT AlignmentViewer program</I
+></A
+>
+	"</SPAN
+>
+      </P
+><P
+>&#13;	However, in the default setting of the Java virtual machine (JVM),
+	you will be likely to encounter a memory allocation error
+	especially when aligning long sequences dynamically.
+	To avoid this problem, you need to increase the size of
+	the memory allocation pool for the JVM.
+      </P
+><P
+></P
+><UL
+><LI
+><P
+>&#13;	<SPAN
+CLASS="productname"
+>Windows</SPAN
+>:
+	Download the <TT
+CLASS="filename"
+>AlignmentViewer.jar</TT
+> file and
+	do the following (see <A
+HREF="x99.html#fig_win_shortcut"
+>Figure 1</A
+>).
+      <P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>&#13;	Create a shortcut of the <TT
+CLASS="filename"
+>AlignmentViewer.jar</TT
+>
+	file (Right-click on the jar file &#8658;
+	<B
+CLASS="guimenu"
+>Create Shortcut</B
+>).
+	</P
+></LI
+><LI
+><P
+>&#13;	Open the properties window of the shortcut (Right-click on the
+	shortcut &#8658; <B
+CLASS="guimenu"
+>Properties</B
+>).
+	</P
+></LI
+><LI
+><P
+>&#13;	Open the Shortcut tab and
+	enter the java command in the <B
+CLASS="guimenu"
+>Target:</B
+> box as
+	follows:
+	[ <TT
+CLASS="userinput"
+><B
+>java -Xmx512m -jar "C:\Documents and Settings\..."</B
+></TT
+> ],
+	where <TT
+CLASS="userinput"
+><B
+>"C:\Documents and Settings\..."</B
+></TT
+> is the
+	original file location. This might be different in you situation,
+	but do not modify the orignal name in anyway. Then, press "OK".
+	</P
+></LI
+></OL
+>
+      </P
+></LI
+><LI
+><P
+>&#13;	<SPAN
+CLASS="productname"
+>Mac OSX</SPAN
+>:
+	Download and use the OSX application version of AlignmentViewer
+	(<TT
+CLASS="filename"
+>AlignmentViewer.app</TT
+>),
+	instead of the <TT
+CLASS="filename"
+>AlignmentViewer.jar</TT
+> file.
+      </P
+></LI
+><LI
+><P
+>&#13;	<SPAN
+CLASS="productname"
+>Linux/Unix</SPAN
+>:
+	Download the <TT
+CLASS="filename"
+>AlignmentViewer.jar</TT
+> file and
+	type <TT
+CLASS="userinput"
+><B
+>java -Xmx512m -jar AlignmentViewer.jar</B
+></TT
+>
+	to invoke the program.
+      </P
+></LI
+></UL
+><DIV
+CLASS="figure"
+><A
+NAME="fig_win_shortcut"
+></A
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="fig/win_shortcut.gif"></P
+></DIV
+><P
+><B
+>Figure 1. Increasing the memory allocation pool of the JVM
+for AlignmentViewer on Windows XP</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN144"
+></A
+>DataServer</H2
+><P
+>&#13;Copy the downloaded archive <TT
+CLASS="filename"
+>CGAT.tgz</TT
+> into
+an appropriate directory and extract files by <B
+CLASS="command"
+>tar</B
+> command,
+which generates a directory named <TT
+CLASS="filename"
+>CGAT</TT
+>.
+Enter this directory and invoke a configuration script
+<B
+CLASS="command"
+>SetUp.pl</B
+>.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;tar cvfz CGAT.tgz
+cd CGAT
+SetUp.pl
+</PRE
+></TD
+></TR
+></TABLE
+>
+SetUp.pl first asks you to set the <TT
+CLASS="envar"
+>CGAT_HOME</TT
+>
+environmental variable to the root of the generated directory tree
+(hereafter we call this directory <TT
+CLASS="envar"
+>$CGAT_HOME</TT
+>), 
+and subsequently it sets several command paths and compiles some programs.
+SetUp.pl saves the <TT
+CLASS="envar"
+>CGAT_HOME</TT
+> path in
+scripts <TT
+CLASS="filename"
+>etc/cgat.sh</TT
+> for sh and bash
+and <TT
+CLASS="filename"
+>etc/cgat.csh</TT
+> for csh and tcsh.
+Before building the database or doing other operation, you must source the
+above script.
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;# in csh or tcsh
+source etc/cgat.csh
+
+# in sh or bash
+. etc/cgat.sh
+</PRE
+></TD
+></TR
+></TABLE
+>
+We recommend you to add this command to your .cshrc script
+(or .profile, .bashrc etc.)
+(in this case, you must use the absolute path
+rather than the relative path, of course).
+	</P
+><P
+>&#13;The set up script tries to detect alignment programs available
+on the server machine and installs detected programs
+in the <TT
+CLASS="filename"
+>$CGAT_HOME/build/align</TT
+> directory.
+You might want to move some commands from the <TT
+CLASS="filename"
+>&#13;$CGAT_HOME/build/align.in</TT
+> directory
+or to remove some unnecessary commands manually.
+	</P
+><P
+>&#13;Similarly, you might want to install manually some optional commands for
+collecting feature segments from the <TT
+CLASS="filename"
+>$CGAT_HOME/build/segment.opt
+</TT
+> directory. Note that in this case you must always set up
+by yourself (if you wanted), since currently the set up script does not
+try to check the availability of these commands automatically.
+Currently, the following commands are available:
+	</P
+><P
+></P
+><UL
+><LI
+><P
+>&#13;<B
+CLASS="command"
+>Glimmer</B
+>:
+Microbial gene-finding system available at
+<A
+HREF="http://www.cbcb.umd.edu/software/glimmer/"
+TARGET="_top"
+>http://www.cbcb.umd.edu/software/glimmer/</A
+>.
+Currently, ver.2 is assumed by default, but you can use ver.3
+if you manually edit the <TT
+CLASS="filename"
+>commands/Glimmer.pl</TT
+> file.
+Before that, of course, you must correctly set up the glimmer program itself.
+	</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="command"
+>ISfind</B
+>:
+Searching an insertion sequence (IS) database by the BLAST program.
+The IS database should be a FASTA formatted sequence file with
+each comment line containing IS family name as
+<TT
+CLASS="computeroutput"
+>"&#62;<TT
+CLASS="parameter"
+><I
+>${ISname}</I
+></TT
+> 
+Fam:<TT
+CLASS="parameter"
+><I
+>${familyname}</I
+></TT
+>"</TT
+>,
+and the file should be installed as <TT
+CLASS="filename"
+>$CGAT_HOME/database/isdb
+</TT
+>. See <A
+HREF="http://www-is.biotoul.fr"
+TARGET="_top"
+>the IS Finder
+database</A
+> for information about IS families. One can use the
+<A
+HREF="http://bioportal.ddbj.nig.ac.jp/is/"
+TARGET="_top"
+>GIB-IS</A
+> database
+available at DDBJ as a downloadable IS database. Download the table file
+(<TT
+CLASS="filename"
+>IS-table-text.txt</TT
+>) and run the following command:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$CGAT_HOME/build/bin/conv_GIB_IS.pl -nr IS-table-text.txt &#62; $CGAT_HOME/database/isdb
+</PRE
+></TD
+></TR
+></TABLE
+>
+	</P
+></LI
+></UL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x79.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c180.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Download</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c20.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The CGAT AlignmentViewer program</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

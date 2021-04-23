@@ -1,0 +1,127 @@
+
+/**
+ * タイトル:     cgat<p>
+ * @version 1.0
+ */
+package cgat;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+public class SegmentPos {
+    public static final int SIDE_UP   = 0;
+    public static final int SIDE_DOWN = 1;
+
+    private double sFrom, sTo;          // 画面(Screen)での座標
+    private int sp1From, sp1To;         // 基準生物種の from/to
+    private int sp2From, sp2To;         // 他方生物種の from/to
+    private int dir;                    // alignment の向き
+    private String seq[];
+    private Alignment align;
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public SegmentPos() {
+        _init();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    private void _init() {
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void setScreenPos(double from, double to) {
+        sFrom = from;
+        sTo   = to;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public double getScreenFrom() {
+        return sFrom;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public double getScreenTo() {
+        return sTo;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void setRegionPos(int from1, int to1, int from2, int to2, int d, Alignment a) {
+        sp1From = from1;
+        sp1To   = to1;
+        sp2From = from2;
+        sp2To   = to2;
+        dir     = d;
+        align   = a;
+
+        seq = new String[2];
+        seq[0] = "";
+        seq[1] = "";
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public int getRegionFrom1() {
+        return sp1From;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public int getRegionTo1() {
+        return sp1To;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public int getRegionFrom2() {
+        return sp2From;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public int getRegionTo2() {
+        return sp2To;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public int getRegionDir() {
+        return dir;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public Alignment getAlignment() {
+        return align;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void setAlignSeq1(String s) {
+        seq[0] = s;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void setAlignSeq2(String s) {
+        seq[1] = s;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public String getAlignSeq1() {
+        return seq[0];
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public String getAlignSeq2() {
+        return seq[1];
+    }
+
+
+}

@@ -1,0 +1,93 @@
+
+/**
+ * タイトル:     cgat<p>
+ * @version 1.0
+ */
+package cgat;
+
+import java.util.*;
+import java.awt.*;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+public class ColorTabEnt {
+
+    protected String entId;
+    protected Color  colDark;
+    protected Color  colLight;
+    protected String legend;
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public ColorTabEnt(String e, Color c, String l) {
+        setEntId(e);
+        setColorDark(c);
+        setColorLight(c);
+        setLegend(l);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public ColorTabEnt(String e, Color cd, Color cl, String l) {
+        setEntId(e);
+        setColorDark(cd);
+        setColorLight(cl);
+        setLegend(l);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public void setEntId(String e) {
+        entId = e;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public void setColorLight(Color c) {
+        colLight = c;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public void setColorDark(Color c) {
+        colDark = c;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public void setLegend(String l) {
+        legend = l;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public String getEntId() {
+        return entId;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public Color getColor() {
+        return getColorDark();
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public Color getColorLight() {
+        return colLight;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public Color getColorDark() {
+        return colDark;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //
+    public String getLegend() {
+        return legend;
+    }
+
+}
+

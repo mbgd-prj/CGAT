@@ -1,0 +1,5 @@
+#id	color	color2	legend
+0	blue	blue	paralogs
+1	cyan	cyan	best hit only on seq1 (duplicate on seq1)
+2	green	green	best hit only on seq2 (duplicate on seq2)
+3	white	black	bidirectional best hit

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://mbgd.genome.ad.jp/CGAT/dist/" href="AlignmentViewer.jnlp">
+<information>
+  <title>CGAT AlignmentViewer</title>
+  <vendor>Comparative Genome Analysis Project</vendor>
+</information>
+<security>
+</security>
+<resources>
+  <j2se version="1.4+" java-vm-args="-Xmx512m" />
+  <jar href="AlignmentViewer.jar" />
+</resources>
+<application-desc main-class="cgat.AlignmentViewer" />
+</jnlp>

@@ -1,0 +1,1653 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//Normal Walsh//DTD DocBk XML V3.1//EN"
+     "/usr/share/sgml/docbook//xml-dtd-4.2-1.0-17.2/docbookx.dtd">
+
+<book>
+  <title> CGAT User Manual </title>
+  <bookinfo>
+	<title>CGAT User Manual</title>
+	<pubdate>Jul,2006</pubdate>
+	<authorgroup>
+	  <author><firstname>Ikuo</firstname><surname>Uchiyama</surname>
+		<affiliation> <orgname>
+			National Institute for Basic Biology,
+			National Institutes of Natural Sciences
+		</orgname></affiliation>
+	  </author>
+	</authorgroup>
+	<copyright>
+	<year>2006</year>
+	<holder>Ikuo Uchiyama</holder>
+	</copyright>
+  </bookinfo>
+
+  <chapter id="whatis">
+  <title> What is CGAT ? </title>
+
+    <para>
+<application>CGAT</application> is a Comparative Genome Analysis Tool
+that was developed for
+detailed comparison of closely related bacterial-sized genomes, mainly for
+analysis of complex evolutionary changes between two related
+genomes.  CGAT visualizes precomputed pairwise genome alignments
+on both dotplot and alignment viewers.  Users can put several
+information on this alignment, such as existence of tandem repeats
+or interspersed repetitive sequences and changes in codon usage bias,
+to facilitate interpretation of the observed
+genomic changes.  Besides visualization functionalities,
+CGAT also provides a general framework to process genome-scale
+alignments using various existent alignment programs such as
+BLAST/MegaBlast, FASTA, MUMmer, Blat and BlastZ.
+    </para>
+    <para>
+Basically, CGAT employs a client-server architecture, which consists of
+<command>AlignmentViewer</command> (client; a Java application) and
+<command>DataServer</command>
+(a set of Perl scripts).
+The DataServer consists of data construction scripts and CGI scripts
+and AlignmentViewer obtains the data from the server thorough the HTTP
+protocol. AlignmentViewer can also obtain data from the local file system
+when the server and client are installed on the same machine.
+    </para>
+
+  </chapter>
+
+  <chapter id="install">
+  <title> Installing CGAT </title>
+  <sect1>
+    <title> Requirements </title>
+      <para>
+<application>AlignmentViewer</application> is written in Java and
+should run on any machine supporting
+<ulink url="http://www.java.com">Java</ulink> (JDK 1.4 or higher).
+      </para>
+      <para>
+<application>DataServer</application> is a set of Perl scripts
+and assumes Unix environment with <ulink url="http://www.perl.com">Perl</ulink>
+installed (version 5.8 or higher). It also assumes that the perl executable
+is installed in the <filename>/usr/bin</filename> directory; please make
+a symbolic link if it is located in a different directory.
+The LWP (libwww-perl) module, which is downloadable from
+<ulink url="http://www.cpan.org">the CPAN site</ulink>,
+is also required when you want to download data from the MBGD server.
+DataServer also needs an HTTPD server for communicating with
+the client program. In this manual, we assume that
+<ulink url="http://httpd.apache.org">Apache HTTPD</ulink> version 2.0 or
+more is installed on your server machine.
+      </para>
+      <para>
+CGAT uses several programs for calculating alignments of two sequences
+and identifying several feature segments on individual sequences.
+Currently the following programs are supported:
+      </para>
+
+<table frame="topbot">
+ <title> Alignment programs currently supported by CGAT </title>
+ <tgroup cols="2">
+   <thead>
+	<row>
+	<entry>program</entry>
+	<entry>URL</entry>
+	</row>
+   </thead>
+   <tbody>
+	<row>
+	<entry> Blast/MegaBlast </entry>
+	<entry> <ulink url="http://www.ncbi.nlm.nih.gov/BLAST/"></ulink> </entry>
+	</row>
+
+	<row>
+	<entry> Fasta</entry>
+	<entry> <ulink url="http://fasta.bioch.virginia.edu/"></ulink> </entry>
+	</row>
+
+	<row>
+	<entry> MUMmer</entry>
+	<entry> <ulink url="http://mummer.sourceforge.net/"></ulink> </entry>
+	</row>
+
+	<row>
+	<entry> Blat/WABA </entry>
+	<entry> <ulink url="http://www.cse.ucsc.edu/~kent"></ulink> </entry>
+	</row>
+
+	<row>
+	<entry> BlastZ</entry>
+	<entry> <ulink url="http://www.bx.psu.edu/miller_lab/"></ulink> </entry>
+	</row>
+
+ 	<row>
+	<entry> PatternHunter </entry>
+	<entry> <ulink url="http://www.bioinformaticssolutions.com/products/ph/"></ulink> </entry>
+	</row>
+
+ 	<row>
+	<entry> CHAOS </entry>
+	<entry> <ulink url="http://lagan.stanford.edu/lagan_web/index.shtml"></ulink> </entry>
+	</row>
+
+ 	<row>
+	<entry> GAME </entry>
+	<entry> <ulink url="http://cancer.informatics.indiana.edu/game/"></ulink> </entry>
+	</row>
+
+ 	<row>
+	<entry> SSAHA </entry>
+	<entry> <ulink url="http://www.sanger.ac.uk/Software/analysis/SSAHA/"></ulink> </entry>
+	</row>
+
+   </tbody>
+ </tgroup>
+</table>
+      <para>
+You should install one or more of the above programs on the server machine
+before installing the CGAT DataServer.  Please refer to the above URL for
+installing individual programs.  Basically, the DataServer assumes
+at least the NCBI Blast/MegaBlast package is installed.
+      </para>
+
+  </sect1>
+  <sect1>
+    <title> Download </title>
+       <para>
+The latest version of CGAT is available at
+<ulink url="http://mbgd.genome.ad.jp/CGAT/"></ulink>.
+
+You can download and install only the client program
+(<filename>AlignmentViewer.jar</filename>)
+or the full version including both the client and server programs
+(<filename>CGAT.tar</filename>) depending on what you need.
+       </para>
+
+      <itemizedlist>
+      <listitem><para>
+The client program (
+<ulink url="http://mbgd.genome.ad.jp/CGAT/dist/AlignmentViewer.jar">
+<filename>AlignmentViewer.jar</filename></ulink>).
+You can download and install only the client program
+if you intend to connect to the existing servers that you have
+already set up or to the default server
+(<ulink url="http://mbgd.genome.ad.jp/CGAT/"></ulink>) for trial.
+      </para></listitem>
+      <listitem><para>
+The client program as a Mac OSX application (
+<ulink url="http://mbgd.genome.ad.jp/CGAT/dist/AlignmentViewer.app.tgz">
+<filename>AlignmentViewer.app</filename></ulink>).
+We recommend Mac OSX users to download
+this because it has been set up with increased memory
+allocation that solves the problem described in the next section.
+      </para></listitem>
+      <listitem><para>
+The full version of CGAT (
+<ulink url="http://mbgd.genome.ad.jp/CGAT/dist/CGAT.tgz">
+<filename>CGAT.tgz</filename></ulink>),
+including both the client and server programs.
+You must install this package if you intend to analyze your own data locally.
+      </para></listitem>
+      </itemizedlist>
+  </sect1>
+  <sect1>
+    <title> Install </title>
+    <sect2>
+      <title> AlignmentViewer </title>
+      <para>
+	Basically, you need not particular operation after having downloaded
+	the program file (<filename>AlignmentViewer.jar</filename>) &mdash;
+	double click the icon (OSX or Windows) or type the java command
+	(Unix) to invoke the program. See the chapter
+	<quote>
+	<link linkend="alignmentviewer" endterm="alignmentviewer.title" />
+	</quote>
+      </para>
+      <para>
+	However, in the default setting of the Java virtual machine (JVM),
+	you will be likely to encounter a memory allocation error
+	especially when aligning long sequences dynamically.
+	To avoid this problem, you need to increase the size of
+	the memory allocation pool for the JVM.
+      </para>
+      <itemizedlist>
+      <listitem><para>
+	<productname>Windows</productname>:
+	Download the <filename>AlignmentViewer.jar</filename> file and
+	do the following (see <xref linkend="fig_win_shortcut" />).
+      <orderedlist>
+	<listitem><para>
+	Create a shortcut of the <filename>AlignmentViewer.jar</filename>
+	file (Right-click on the jar file &rArr;
+	<guimenu>Create Shortcut</guimenu>).
+	</para></listitem>
+	<listitem><para>
+	Open the properties window of the shortcut (Right-click on the
+	shortcut &rArr; <guimenu>Properties</guimenu>).
+	</para></listitem>
+	<listitem><para>
+	Open the Shortcut tab and
+	enter the java command in the <guimenu>Target:</guimenu> box as
+	follows:
+	[ <userinput>java -Xmx512m -jar "C:\Documents and Settings\..."</userinput> ],
+	where <userinput>"C:\Documents and Settings\..."</userinput> is the
+	original file location. This might be different in you situation,
+	but do not modify the original name in anyway. Then, press "OK".
+	</para></listitem>
+     </orderedlist>
+      </para></listitem>
+      <listitem><para>
+	<productname>Mac OSX</productname>:
+	Download and use the OSX application version of AlignmentViewer
+	(<filename>AlignmentViewer.app</filename>),
+	instead of the <filename>AlignmentViewer.jar</filename> file.
+      </para></listitem>
+      <listitem><para>
+	<productname>Linux/Unix</productname>:
+	Download the <filename>AlignmentViewer.jar</filename> file and
+	type <userinput>java -Xmx512m -jar AlignmentViewer.jar</userinput>
+	to invoke the program.
+      </para></listitem>
+      </itemizedlist>
+
+<figure id="fig_win_shortcut">
+<title>Increasing the size of the memory allocation pool of the JVM
+for AlignmentViewer on Windows XP</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/win_shortcut.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/win_shortcut.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+    </sect2>
+    <sect2>
+      <title> DataServer </title>
+	<para>
+Copy the downloaded archive <filename>CGAT.tgz</filename> into
+an appropriate directory and extract files by <command>tar</command> command,
+which generates a directory named <filename>CGAT</filename>.
+Enter this directory and invoke a configuration script
+<command>SetUp.pl</command>.
+<screen>
+tar cvfz CGAT.tgz
+cd CGAT
+SetUp.pl
+</screen>
+SetUp.pl first asks you to set the <envar>CGAT_HOME</envar>
+environmental variable to the root of the generated directory tree
+(hereafter we call this directory <envar>$CGAT_HOME</envar>), 
+and subsequently it sets several command paths and compiles some programs.
+SetUp.pl saves the <envar>CGAT_HOME</envar> path in
+scripts <filename>etc/cgat.sh</filename> for sh and bash
+and <filename>etc/cgat.csh</filename> for csh and tcsh.
+Before building the database or doing other operation, you must source the
+above script.
+
+<screen>
+# in csh or tcsh
+source etc/cgat.csh
+
+# in sh or bash
+. etc/cgat.sh
+</screen>
+We recommend you to add this command to your .cshrc script
+(or .profile, .bashrc etc.)
+(in this case, you must use the absolute path
+rather than the relative path, of course).
+	</para>
+	<para>
+The set up script tries to detect alignment programs available
+on the server machine and installs detected programs
+in the <filename>$CGAT_HOME/build/align</filename> directory.
+You might want to move some commands from the <filename>
+$CGAT_HOME/build/align.in</filename> directory
+or to remove some unnecessary commands manually.
+	</para>
+	<para>
+Similarly, you might want to install manually some optional commands for
+collecting feature segments from the <filename>$CGAT_HOME/build/segment.opt
+</filename> directory. Note that in this case you must always set up
+by yourself (if you wanted), since currently the set up script does not
+try to check the availability of these commands automatically.
+Currently, the following commands are available:
+	</para>
+	<itemizedlist>
+	<listitem><para>
+<command>Glimmer</command>:
+Microbial gene-finding system available at
+<ulink url="http://www.cbcb.umd.edu/software/glimmer/"></ulink>.
+Currently, ver.2 is assumed by default, but you can use ver.3
+if you manually edit the <filename>commands/Glimmer.pl</filename> file.
+Before that, of course, you must correctly set up the glimmer program itself.
+	</para></listitem>
+	<listitem><para>
+<command>ISfind</command>:
+Searching an insertion sequence (IS) database by the BLAST program.
+The IS database should be a FASTA formatted sequence file with
+each comment line containing IS family name as
+<computeroutput>"><parameter>${ISname}</parameter> 
+Fam:<parameter>${familyname}</parameter>"</computeroutput>,
+and the file should be installed as <filename>$CGAT_HOME/database/isdb
+</filename>. See <ulink url="http://www-is.biotoul.fr">the IS Finder
+database</ulink> for information about IS families. One can use the
+<ulink url="http://bioportal.ddbj.nig.ac.jp/is/">GIB-IS</ulink> database
+available at DDBJ as a downloadable IS database. Download the table file
+(<filename>IS-table-text.txt</filename>) and run the following command:
+<screen>
+$CGAT_HOME/build/bin/conv_GIB_IS.pl -nr IS-table-text.txt > $CGAT_HOME/database/isdb
+</screen>
+	</para></listitem>
+	</itemizedlist>
+    </sect2>
+  </sect1>
+  </chapter>
+
+
+  <chapter id="alignmentviewer">
+  <title id="alignmentviewer.title"> The CGAT AlignmentViewer program</title>
+
+  <sect1 id="startAliView">
+    <title id="startAliView.title"> Starting AlignmentViewer</title>
+	<para>
+	On Windows or Mac OSX, double clicking on the "AlignmentViewer"
+	icon invokes the program.
+	On Unix systems, type the following command on the command line:
+<screen>
+	java -jar AlignmentViewer.jar
+</screen>
+	</para>
+	<para>
+	However, when invoking with the above command, you will be
+	likely to encounter a memory allocation error especially when you
+	want to see an alignment of long sequences generated by dynamical
+	calculation.
+	To avoid this, we recommend you to increase the size of the memory
+	allocation pool for the Java virtual machine with
+	the <option>-Xmx</option> option.
+	</para>
+<screen>
+	java -Xmx512m -jar AlignmentViewer.jar
+</screen>
+      <sect2 id="loadData">
+	<title id="loadData.title">Load data</title>
+	<para>
+	After running the program, first you must load data by choosing
+	<guimenu>File &rArr; Load</guimenu> from the menu.
+	</para>
+
+<figure>
+<title>The menu window for specifying data to be loaded</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/dataload.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/dataload.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry> <term> Server URL </term>
+<listitem> <para>
+Choose the server from which data are downloaded. By default, only
+the default CGAT server (running on the MBGD server) is registered.
+You can add more servers to this list in the Locations section
+of the Properties panel (<guimenu>File &rArr; Properties</guimenu>),
+if you or your colleagues have been setup an original new server.
+See the chapter <quote>
+<link linkend="dataserver" endterm="dataserver.title" />
+</quote> for server setup and
+the <quote>
+<link linkend="configAlignViewer" endterm="configAlignViewer.title" />
+</quote>section for properties setup.
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Alignment Data </term>
+<listitem> <para>
+Choose the alignment data to be downloaded specified by the combination of
+organism names and a program name.
+Note that choosing the server URL above reset the list of
+available alignment data.
+If you have setup the data on the local file system that the AlignmentViewer
+program can directly accessed, and have correctly set the
+<envar>CGAT_HOME</envar> variable in the Properties panel,
+you can also choose the data available
+on the local machine. These data are listed without the "(Server)" indication.
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Gene Attribute </term>
+<listitem> <para>
+Choose the gene attribute data for coloring genes.
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Feature Segment Data </term>
+<listitem> <para>
+Choose the feature segment data to be shown on the additional annotation
+tracks (see the section
+<quote><link linkend="alignmentDisplay" endterm="alignmentDisplay.title" />
+</quote>). By default, maximally three types of segment data can
+be loaded at once, but the maximum number can be increased in
+the Properties panel.
+</para> </listitem> </varlistentry>
+
+</variablelist>
+
+
+      </sect2>
+  </sect1>
+
+  <sect1 id="main">
+    <title> The main window of AlignmentViewer</title>
+	<para>
+The main window of AlignmentViewer consists of four parts: a menu bar,
+a control panel, an alignment display panel, and a dotplot display panel.
+Both the alignment and dotplot displays show precomputed alignments.
+Users can change the current view on each display by pressing a scrolling
+or zooming button on the control panel. These operations update both
+the alignment and dotplot displays in a coherent manner.
+	</para>
+
+	<para>
+In AlignmentViewer, one of the compared sequences is considered as
+the reference sequence and the other is considered as the
+target sequence.
+In the alignment display panel, the reference and the target sequences
+are displayed on the upper and lower tracks, respectively,
+and in the dotplot display panel, the reference and the target
+sequences  correspond to the x- and y-axes, respectively.
+These sequences can be exchanged by <guimenu>View</guimenu>
+&rArr; <guimenu>Exchange Reference Genome</guimenu>.
+
+	</para>
+<figure>
+<title> Main window of AlignmentViewer</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/mainwindow.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/mainwindow.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+    <sect2 id="control_panel">
+    <title> Control panel </title>
+	<para>
+	The control panel contains several buttons for controlling the current
+	view of both the alignment and dotplot displays.
+
+<figure>
+<title> Control panel </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/controlpanel.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/controlpanel.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+<variablelist>
+<varlistentry> <term> Move left/right </term>
+<listitem> <para>
+Move the current position to the left or right along the current alignment.
+</para> </listitem> </varlistentry>
+<varlistentry> <term> Zoom in/out </term>
+<listitem> <para>
+Zoom-in or -out the current view.
+</para> </listitem> </varlistentry>
+<varlistentry> <term> Alignment color </term>
+<listitem> <para>
+Toggle the alignment color mode between the "Best Hit" mode and
+the "Identity" mode.
+	<itemizedlist>
+	<listitem> <para>
+	Best Hit: white, orthologs; cyan, duplicated on the sequence 1;
+	green, duplicated on the sequence 2; and blue, paralogs (by default).
+	</para></listitem>
+	<listitem> <para>
+	Identity: red, 50%; yellow, 85%; and green, 100% (by default).
+	</para></listitem>
+	</itemizedlist>
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Alignment mode </term>
+<listitem> <para>
+Toggle the alignment mode between the "Regionwise" alignment mode and
+the "Reference-target" alignment mode.
+See the section <quote>
+<link linkend="alignmentDisplay" endterm="alignmentDisplay.title"/> </quote>.
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Exchange ref-target </term>
+<listitem> <para>
+Exchange the reference sequence and the target sequence.
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Display dotplot </term>
+<listitem> <para>
+Toggle the status of the dotplot display panel between displayed and hidden.
+</para> </listitem> </varlistentry>
+<varlistentry> <term> Zoom in/out dotplot </term>
+<listitem> <para>
+Zoom-in or -out the dotplot display.
+</para> </listitem> </varlistentry>
+<varlistentry> <term> Zoomed axis </term>
+<listitem> <para>
+Specify the axis of the dotplot to be zoomed individually.
+</para> </listitem> </varlistentry>
+<varlistentry> <term> Change background </term>
+<listitem> <para>
+Toggle the background color of the alignment and dotplot displays
+between the dark color (black by default) and the light color
+(white by default).
+</para> </listitem> </varlistentry>
+
+<varlistentry> <term> Show annotation table </term>
+<listitem> <para>
+Show an annotation table for information on gene or feature segment.
+</para> </listitem> </varlistentry>
+</variablelist>
+	</para>
+
+<figure>
+<title>Alignment color modes. The Best-Hit mode (A),
+and the Identity mode (B)</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/alignment_color.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/alignment_color.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+    </sect2>
+
+    <sect2 id="alignmentDisplay">
+    <title id="alignmentDisplay.title"> Alignment display panel </title>
+	<para>
+The alignment display panel contains three basic tracks: the central
+tracks (alignment track) shows a graphical representation of the
+alignments, and the upper and lower tracks (gene annotation tracks) show
+the gene annotation of the upper and lower genomes, respectively.
+More annotation tracks can be added to display the location of
+several feature segments.
+	</para>
+
+
+	<para>
+In addition, the "location fields" and the "strand switches" are on the left
+side of the tracks.
+The location field indicates the central coordinate of the current view,
+and strand switch indicates the strand of each genome currently selected.
+Users can jump to the desired location by entering a coordinate value
+or a gene identifier (e.g. HP0812) in the location field, and can toggle
+the strand direction by pressing the strand switch.
+	</para>
+	<para>
+Some notes: 1) You must always enter the location of the reference genome
+if you want to see the orthologous alignment around the specified locus.
+If you want to specify the location in the current target genome,
+you should exchanges the reference and the target genomes before
+entering the position; 2) If you invert the reference genome by the
+strand switch button, the direction of the subsequent movement is also
+inverted. This means that when you press the 'move left' button,
+the cursor in the dotplot display will move right, since the coordinate
+of the dotplot display is not changed by this operation.
+	</para>
+
+
+<figure>
+<title> Alignment display panel</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/alignment_display.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/alignment_display.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+	<sect3>
+	<title> Alignment modes </title>
+
+	<para>
+In CGAT, there are two modes in the alignment display:
+"regionwise" alignment mode and "reference-target" alignment mode.
+
+In the regionwise alignment mode, all alignments included in the current view
+are displayed. Each alignment is represented as a trapezoid formed by
+connecting the corresponding endpoints of the aligned region.
+
+On the other hand, in the reference-target alignment mode, every
+orthologous regions of the target sequence is mappend as a fragment
+onto the reference sequence.
+	</para>
+<figure>
+<title> The two alignment modes: the regionwise mode (A) and
+the reference-target mode (B). </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/alignment_mode.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/alignment_mode.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+	</sect3>
+
+	<sect3>
+	<title> Alignment track </title>
+	<para>
+The alignment track displays precomputed alignments schematically.
+Using the zooming buttons in the control panel, users can change
+the scale from the entire genome level to the single nucleotide
+level. In the nucleotide sequence alignment, mismatched site is colored
+red and gapped site is colored green (by default).
+	</para>
+<figure>
+<title> Zooming the alignment display </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/zoom_alignment.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/zoom_alignment.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+	<para>
+In the regionwise alignment mode, left click on one of the alignment
+regions (tetragons) sets the center of the selected alignment adjusted to
+the center of the display.
+	</para>
+
+	<para>
+By right click on the alignment track, a pop-up menu appears including
+the following items:
+<itemizedlist>
+
+<listitem><para> <guimenu>View Re-Alignment</guimenu>:
+	Re-calculate alignment between the sequences within the current
+	displayed region. This item appears only when the current
+	displayed region is smaller than the specified length
+	(Size of Realignment).
+	See the <quote><link linkend="configAlignViewer"
+	endterm="configAlignViewer.title"/></quote> section.
+</para></listitem>
+
+<listitem><para> <guimenu>View Alignment</guimenu>:
+	Display the precomputed alignment under the clicked position.
+</para></listitem>
+
+<listitem><para> <guimenu>Ident = ## %</guimenu>:
+	No action. The item is displayed only for showing the percent
+	identity of the precomputed alignment under the clicked position.
+</para></listitem>
+
+<listitem><para> <guimenu>Color Legend</guimenu>:
+	Display the color legend for the current alignment display.
+</para></listitem>
+
+</itemizedlist>
+	</para>
+
+	</sect3>
+	<sect3>
+	<title> Annotation track </title>
+	<para>
+The annotation track displays several types of feature segments
+identified in each genome. 
+	</para>
+	<para>
+By left click on one of the feature segments in the annotation track,
+a pop-up menu appears:
+<itemizedlist>
+<listitem><para> <varname>SegmentName</varname>:
+	Open the web browser to access the web site,
+	if an appropriate URL is defined on the server.
+	Otherwise, no action is taken.
+</para></listitem>
+<listitem><para> <guimenu>View Sequence: ## - ##</guimenu>:
+	Show the nucleotide sequence of the feature segment.
+</para></listitem>
+</itemizedlist>
+
+By right click on the annotation track, another pop-up menu appears:
+
+<itemizedlist>
+<listitem><para> <guimenu>Clicked Pos: ## </guimenu>:
+	No action. The item is displayed only for showing the clicked position.
+</para></listitem>
+
+<listitem><para> <guimenu>Redraw (Set Center=##) </guimenu>:
+	Move the clicked position to the center of the display window.
+</para></listitem>
+
+<listitem><para> <guimenu>Search Alignment ## - ## </guimenu>:
+	Search the set of precomputed alignments for those covering
+	the region around the clicked position.
+</para></listitem>
+
+<listitem><para> <guimenu>Color Legend</guimenu>:
+	Display the color legend for the current annotation display.
+</para></listitem>
+</itemizedlist>
+
+	</para>
+	</sect3>
+    </sect2>
+
+    <sect2 id="dotplot">
+    <title> Dotplot display panel </title>
+	<para>
+In the dotplot display panel, all alignments are plotted onto
+the 2-dimensional space with the horizontal (X) and the vertical (Y)
+axes representing the reference and the target sequences, respectively.
+In this plot, the current scope, i.e. the region displayed in the alignment
+display, is also shown as a rectangular region.
+Users can move the current scope by clicking on any points in the plot
+to move.
+	</para>
+<figure>
+<title> Dotplot display panel </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/dotplot_display.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/dotplot_display.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+	<para>
+In the dotplot display, independent scaling of the x-axis and y-axis
+is possible. This feature is useful in visualizing the distribution
+of homologous regions of a specific segment on one genome against
+the entirety of the other genome.
+In the following example, dotplot with expanded y-axis scale
+clarifies the presence of inverted duplication at both ends
+of the rearranged segment on the reference genome (x-axis).
+	</para>
+<figure>
+<title> Dotplot display comparing the entire genomes (A) and
+	dotplot display with expanded y-axis scale</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/dotplot_zoom_y.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/dotplot_zoom_y.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="MenuItems">
+    <title id="MenuItems.title"> Menu items </title>
+    <sect2 id="File">
+      <title> File menu</title>
+      <sect3 id="Load">
+        <title> Load </title>
+	  <para>
+Load data from the specified server or the local file system.
+See the <quote><link linkend="startAliView" endterm="startAliView.title"/>
+</quote> section.
+	  </para>
+      </sect3>
+  
+      <sect3 id="Print">
+        <title> Print </title>
+	  <para>
+Print out the image of the current alignment display.
+	  </para>
+      </sect3>
+  
+      <sect3 id="Properties">
+        <title id="Properties.title"> Properties </title>
+	<para>
+	Configure user property parameters.
+	See the <quote><link linkend="configAlignViewer"
+		endterm="configAlignViewer.title"/> </quote> section.
+	</para>
+      </sect3>
+
+      <sect3 id="Exit">
+        <title> Exit </title>
+	  <para>
+Exit the program.
+This item appears only in the standalone application.
+For applet version, you must exit the web browser to exit the program.
+	  </para>
+      </sect3>
+    </sect2>
+  
+    <sect2 id="Search">
+      <title> Search menu</title>
+      <sect3 id="MarkGenes">
+        <title> Mark genes </title>
+	  <para>
+Mark a specified set of genes.
+	  </para>
+	  <para>
+An input form is opened for users to enter a list of gene names to be
+marked. Gene names can be entered individually or be read from a file.
+By pressing the <guibutton>Search</guibutton> button, gene names are
+registered.  Locations of the registered genes are indicated
+on each axis of the dotplot display, and a new table window is
+opened containing the information of the these genes.
+	  </para>
+	  <para>
+Additional calls of this function will add genes to the existing list.
+To remove genes from the list, enter the gene names to be removed and
+press <guibutton>Clear</guibutton>.
+To clear the entire list,  press <guibutton>All Clear</guibutton>.
+	  </para>
+<figure>
+<title> Marking genes. Input form for entering genes (A) and the dotplot
+with genes marked with triangles on each axis (B)</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/mark_genes.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/mark_genes.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+      </sect3>
+      <sect3 id="FilterAlignment">
+        <title> Filter Alignments </title>
+	  <para>
+Filtering out the alignments that do not satisfy the specified
+conditions. Alignments are filtered from both the alignment and dotplot
+displays.  A filter can be applied to one of the following fields:
+<itemizedlist>
+<listitem><para>
+<guimenu>Identity</guimenu>: percentage identity; numeric.
+</para></listitem>
+<listitem><para>
+<guimenu>Score</guimenu>: similarity score; numeric.
+</para></listitem>
+<listitem><para>
+<guimenu>Best Hit Status</guimenu>:
+one of the following:
+3, orthologs (bidirectional best hits, BBH);
+2, duplicated only in the sequence-2;
+1, duplicated only in the sequence-1;
+0, paralogs.
+</para></listitem>
+</itemizedlist>
+For specification of the numeric field conditions, see the next subsection
+<quote><link linkend="FilterSegment" endterm="FilterSegment.title" />
+</quote>
+	  </para>
+	  <para>
+Once filtered, a '*' mark is displayed on the left side of the alignment
+track (see <xref linkend="fig_filter_align" />C).
+Additional calls will add filters to the existing one.
+For example, users can specify conditions such as "Best Hit Status is BBH
+and Identity &ge; 90%" by two successive calls of this function.
+To reset the filters, press the <guibutton>Reset Alignment Filters</guibutton>
+button.
+	  </para>
+<figure id="fig_filter_align">
+<title> Filtering alignments. The filtering condition window (A), and
+alignment displays of before (B) and after (C) filtering (showing only BBH).
+</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/filter_alignment.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/filter_alignment.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+      </sect3>
+
+      <sect3 id="FilterSegment">
+        <title id="FilterSegment.title"> Filter Genes/Segments </title>
+	  <para>
+Filtering out the genes or feature segments that do not satisfy the
+specified conditions.  A filter can be applied to any field of any
+kind of segment that is currently loaded.
+	  </para>
+	  <para>
+Kinds of conditions to be applied are different depending on
+the types of the fields (numeric and string).
+The following conditions are defined:
+<variablelist>
+<varlistentry><term>Numeric field</term>
+<listitem><para> Available conditions are:
+<guimenu>Between</guimenu> (a &le; x &le; b),
+<guimenu>Except Between</guimenu>(x &lt; a or b &lt; x),
+<guimenu>Less Than</guimenu> (x &lt; a),
+<guimenu>Less Equal</guimenu> (x &le; a),
+<guimenu>Equal</guimenu> (x = a),
+<guimenu>Greater Equal</guimenu> (x &ge; a), and
+<guimenu>Greater Than</guimenu> (x &gt; a),
+where a and/or b are values to be specified.
+To specify <guimenu>Between</guimenu> or <guimenu>Except Between</guimenu>,
+two values should be separated by a comma (e.g. "80,90").
+</para></listitem>
+</varlistentry>
+<varlistentry><term>String field</term>
+<listitem><para>
+	Available conditions are <guimenu>Regex</guimenu> (regular expression)
+	and  <guimenu>Equal</guimenu> (exact match).
+</para></listitem>
+</varlistentry>
+</variablelist>
+	  </para>
+	  <para>
+Once filtered, a '*' mark is displayed on the left side of the annotation track.
+Additional calls will add filters to the existing one.
+To reset the filter on the specified segment,
+choose the segment type and press the <guibutton>Reset This Filter
+</guibutton> button.
+To reset all filters, press the <guibutton>Reset All Filters</guibutton> button.
+	  </para>
+<figure>
+<title> Filter genes/alignments </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/filter_segments.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/filter_segments.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+      </sect3>
+
+      <sect3 id="DynamicSearch">
+        <title> Dynamic Search </title>
+	  <para>
+Search each genome for specific segments or sets of segments
+dynamically, by calling a CGI script running on the server.
+Results will be displayed in the additional annotation tracks,
+or in the outermost pair of tracks (overwriting the existing data)
+if the maximum number of segment tracks have already been used.
+	  </para>
+	  <para>
+Currently, the following programs are available:
+	  </para>
+
+<itemizedlist>
+<listitem><para>
+<guimenu>Blast</guimenu>: BLAST similarity search for a nucleotide
+[blastn(direct) / tblastx(translation)] or a protein [tblastn] query sequence.
+</para></listitem>
+<listitem><para>
+<guimenu>PatSearch</guimenu>: Regular expression pattern search. See
+the document of the
+<ulink url="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">
+Java regex library</ulink>.
+</para></listitem>
+<listitem><para>
+<guimenu>DirRep</guimenu>: Direct repeat search.
+</para></listitem>
+<listitem><para>
+<guimenu>SimpleRep</guimenu>: Simple repeat (or short tandem repeat) search.
+</para></listitem>
+</itemizedlist>
+
+      </sect3>
+    </sect2>
+  
+    <sect2 id="View">
+      <title> View menu</title>
+      <sect3 id="DataTable">
+        <title> Gene/Segment Data Table </title>
+	  <para>
+Show table of genes or specified feature segment on the specified genome.
+In the table, each row contains species name, the beginning position,
+the ending position, strand direction, assigned color, and the name of
+the segment.
+Additional fields are added, if any, depending on the segment type.
+By clicking a row of this table, the current scope is reset such that
+the specified gene or segment is centered.
+	  </para>
+<figure>
+<title> Gene table </title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/genetable.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/genetable.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+      </sect3>
+      <sect3 id="SequenceWindow">
+        <title> Sequence Window </title>
+	  <para>
+Show nucleotide sequence of each genome within the current region.
+	  </para>
+      </sect3>
+      <sect3 id="ExchangeGenomes">
+        <title> Exchange Reference Genome </title>
+	  <para>
+Exchange the reference and the target sequences. Both the alignment and
+dotplot displays are changed.
+	  </para>
+      </sect3>
+    </sect2>
+  </sect1>
+
+  <sect1 id="configAlignViewer">
+    <title id="configAlignViewer.title"> Configuring AlignmentViewer </title>
+	<para>
+Many properties of AlignmentViewer can be configured through property
+parameters.  These parameters can be changed on the properties window
+(<guimenu>File &rArr; Properties</guimenu>). Configured properties
+are saved in the user home directory.
+	</para>
+	<para>
+In the properties window, the properties are categorized into the following
+four sections.
+
+<orderedlist>
+<listitem><para>
+<guimenu>Locations</guimenu>: Locations of data to be loaded.
+See <quote><link linkend="loadData" endterm="loadData.title" /> </quote>
+for loading data.
+	<itemizedlist>
+	<listitem><para>
+	<guimenu>CGAT_HOME</guimenu>:
+	The server home directory containing the database.
+	You can load data from the local file system,
+	only when the CGAT database is installed in a directory
+	accessible from the AlignmentViewer.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Server URL</guimenu>:
+	Addresses of the CGAT servers. Multiple servers can be specified.
+	You can choose which server to use when you load the data.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Proxy URL</guimenu>:
+	Specify if your organization uses a proxy server.
+	Please ask your network administrator.
+	</para></listitem>
+	</itemizedlist>
+</para></listitem>
+<listitem><para>
+<guimenu>Color</guimenu>: Color preferences.
+You can set two different sets of colors for the dark and light
+background color modes.
+	<itemizedlist>
+	<listitem><para>
+	<guimenu>Background</guimenu>:
+	The background color of both the alignment track and
+	the dotplot display.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Viewing Frame</guimenu>:
+	The color of the frame indicating the current scope in the dotplot
+	display.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Match/Mismatch/Gap</guimenu>:
+	Colors for displaying nucleotide sequence alignments in the
+	annotation track.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Identity</guimenu>:
+	Colors for drawing alignment regions according to the percentage
+	identities (the identity color mode). Colors of the three points
+	(highest, middle, and lowest percentages) can be specified, and
+	the others are interpolated between these colors.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Gene Attribute</guimenu>:
+	Colors for drawing genes in the annotation tracks using gene
+	attribute values.  Colors of the highest and lowest values can
+	be specified, and the remaining values are interpolated between them.
+	</para></listitem>
+	</itemizedlist>
+</para></listitem>
+<listitem><para>
+<guimenu>Panel</guimenu>: Hight of the tracks and the maximum number of tracks.
+	<itemizedlist>
+	<listitem><para>
+	<guimenu>Maximum # of Segment Tracks</guimenu>:
+	Maximum number of feature segments to be loaded. Possibly,
+	the height of the tracks should also be modified (lowered)
+	to display all the information within the screen when you
+	want to increase the number of segment tracks.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Height of Alignment/Gene/Segment Area</guimenu>:
+	Hight of the tracks in the alignment display can be set individually
+	for the alignment track, the gene annotation tracks and the
+	feature segment tracks.
+	</para></listitem>
+	</itemizedlist>
+</para></listitem>
+<listitem><para>
+<guimenu>Alignment</guimenu>: Alignment parameters.
+	<itemizedlist>
+	<listitem><para>
+	<guimenu>Match/Mismatch/Open Gap/Extension Gap</guimenu>:
+	The scoring system for dynamically calculating alignments
+	in the AlignmentViewer program.
+	</para></listitem>
+	<listitem><para>
+	<guimenu>Size of Realignment</guimenu>:
+	Maximum length of the displayed region (scope) within which the
+	re-alignment of the sequences is allowed by right click on the
+	alignment track.
+	</para></listitem>
+	</itemizedlist>
+</para></listitem>
+</orderedlist>
+	</para>
+
+<figure>
+<title>Properties window</title>
+<mediaobject>
+<imageobject role="fo">
+	<imagedata fileref="fig/prop_locations.eps" format="EPS" scale="70" />
+</imageobject>
+<imageobject role="html">
+	<imagedata fileref="fig/prop_locations.gif" format="GIF" />
+</imageobject>
+</mediaobject>
+</figure>
+
+  </sect1>
+
+  </chapter>
+
+  <chapter id="dataserver">
+  <title id="dataserver.title"> The CGAT DataServer package</title>
+
+  <sect1 id="overview">
+    <title> Overview of CGAT DataServer</title>
+    <para>
+The CGAT DataServer package is a collection of data construction scripts and
+CGI scripts. The data construction scripts run several programs to generate
+comparison data to be visualized by the AlignmentViewer program.
+AlignmentViewer can obtain data through the Internet using the CGI
+interface implemented in the server package. Alternatively,
+AlignmentViewer can also obtain data from the <envar>$CGAT_HOME</envar>
+directory when the server and client are installed on the same machine.
+    </para>
+    <para>
+Data generated by CGAT DataServer can be classified into
+the following three classes:
+<variablelist>
+<varlistentry>
+<term> Alignment </term>
+<listitem><para>
+A collection of locally aligned segment pairs between
+two genomes, which are displayed on both alignment and dotplot display
+panel in AlignmentViewer.
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Feature Segments</term>
+<listitem><para>
+A collection of feature segments in each genome,
+which can be displayed on the feature segment tracks in AlignmentViewer. 
+</para></listitem>
+</varlistentry>
+<varlistentry>
+<term>Gene Attribute</term>
+<listitem><para>
+A value associated with each gene, which can be used to
+assign color to that gene in AlignmentViewer.
+</para></listitem>
+</varlistentry>
+</variablelist>
+    </para>
+
+
+    <sect2 id="directory">
+      <title> Directory structure </title>
+      <para>
+       <table frame="topbot">
+         <title>List of directories on the <envar>$CGAT_HOME</envar> directory</title>
+	<tgroup cols='2'>
+	<thead>
+	<row>
+	<entry>Directory</entry>
+	<entry>Contents</entry>
+	</row>
+	</thead>
+	<tbody>
+	<row>
+	<entry>database</entry>
+	<entry>The current release of the database, which is accessed by the CGAT CGI scripts</entry>
+	</row>
+
+	<row>
+	<entry>database.work</entry>
+	<entry>Space for constructing the new database release</entry>
+	</row>
+
+	<row>
+	<entry>work</entry>
+	<entry>Workspace for database construction where many intermediate files are generated.</entry>
+	</row>
+
+	<row>
+	<entry>perllib</entry>
+	<entry>Perl libraries.</entry>
+	</row>
+
+	<row>
+	<entry>etc</entry>
+	<entry>Configuration tables etc.</entry>
+	</row>
+
+	<row>
+	<entry>build</entry>
+	<entry>Scripts for constructing the database</entry>
+	</row>
+
+	<row>
+	<entry>commands</entry>
+	<entry>Commands for identifying several feature segments on each genome.</entry>
+	</row>
+
+	<row>
+	<entry>htdocs</entry>
+	<entry>HTML documents and CGI scripts</entry>
+	</row>
+
+	<row>
+	<entry>client</entry>
+	<entry>Java source code of the client program (AlignmentViewer)</entry>
+	</row>
+	</tbody>
+
+	</tgroup>
+       </table>
+       <table frame="topbot">
+         <title>List of directories on the <filename>database</filename> directory</title>
+	<tgroup cols='2'>
+	<thead>
+	<row>
+	<entry>Directory</entry>
+	<entry>Contents</entry>
+	</row>
+	</thead>
+
+	<tbody>
+
+	<row>
+	<entry>genomes</entry>
+	<entry>Genomic sequences</entry>
+	</row>
+	<row>
+	<entry>genes</entry>
+	<entry>Gene information, including position table (tab subdirectory), nucleotide sequences (nt subdirectory), and amino acid sequences (aa subdirectory)</entry>
+	</row>
+
+	<row>
+	<entry>alignment</entry>
+	<entry> Collection of genome alignments calculated by several programs </entry>
+	</row>
+
+	<row>
+	<entry>segments</entry>
+	<entry> Collection of feature segments calculated by several programs </entry>
+	</row>
+
+	<row>
+	<entry>geneattr</entry>
+	<entry> Collection of gene attribute values calculated by several programs </entry>
+	</row>
+
+	</tbody>
+	</tgroup>
+	</table>
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1>
+    <title> Database construction </title>
+
+    <sect2 id="databuild">
+    <title> Overview of the data construction procedure </title>
+    <para>
+Essentially, the data construction process consists of the following steps:
+     <orderedlist>
+<listitem> <para>
+Prepare your genomic sequence data. If your sequences are already
+in the <ulink url="http://mbgd.genome.ad.jp/">MBGD</ulink>
+database, you can skip this step, because
+the procedure will automatically try to download missing data from MBGD.
+</para> </listitem>
+<listitem> <para>
+Edit <filename><envar>$CGAT_HOME</envar>/etc/speclist</filename>
+to specify a set of species to be analyzed and a set of
+programs to be executed for each species set.
+</para> </listitem>
+<listitem> <para>
+Run <command><envar>$CGAT_HOME</envar>/build/BuildAll.pl</command>.
+This script executes all procedures for building the database according
+to the <filename><envar>$CGAT_HOME</envar>/etc/speclist</filename> file,
+and eventually constructs data on the <filename>
+<envar>$CGAT_HOME</envar>/database.work</filename> directory.
+</para> </listitem>
+<listitem> <para>
+Run <command><envar>$CGAT_HOME</envar>/build/Release.pl</command> to
+release the data from the <filename><envar>$CGAT_HOME</envar>/database.work
+</filename> directory to the <filename><envar>$CGAT_HOME</envar>/database
+</filename> directory.
+</para> </listitem>
+     </orderedlist>
+    </para>
+    </sect2>
+
+    <sect2 id="prepareData">
+      <title> Preparing genomic sequences </title>
+	<para>
+Before running programs, you must prepare genome sequences data.
+There are three possible ways.
+<orderedlist>
+<listitem><para>
+If your sequences are already in the
+<ulink url="http://mbgd.genome.ad.jp/">MBGD</ulink> database,
+the simplest way to prepare data is to remember the abbreviated names of those
+genomes in the MBGD database (e.g. 'eco' for
+<emphasis>Escherichi coli</emphasis> K12).
+and use these names in the configuration table described
+in the next section.  The build procedure automatically
+try to download missing data from MBGD.
+Note that the sequence name specified here is used throughout the system 
+(hereafter we call it <varname>SPNAME</varname>).
+</para></listitem>
+<listitem><para>
+Alternatively, if you have genomic data in GenBank format, you can use the
+<filename><envar>$CGAT_HOME</envar>/build/getDataFromGenBank.pl</filename>
+script to convert it to the CGAT database.
+The syntax of the command is
+<cmdsynopsis>
+<command>getDataFromGenBank.pl</command>
+<arg choice="plain"><replaceable>GBK_FILE</replaceable></arg>
+<arg choice="plain"><replaceable>SPNAME</replaceable></arg>
+</cmdsynopsis>
+For example:
+<screen>
+getDataFromGenBank.pl NC00913.gbk eco
+</screen>
+Here, you can use as <varname>SPNAME</varname> any name that is composed
+of alphanumeric characters, provided that it is unique.
+</para></listitem>
+<listitem><para>
+Otherwise, you must prepare data by yourself. The data you should prepare
+are as follows:
+<itemizedlist>
+<listitem><para>
+Choose an appropriate unique name (<varname>SPNAME</varname>) that is
+composed of alphanumeric characters.
+</para></listitem>
+<listitem><para>
+<filename>$CGAT_HOME/database/genomes/SPNAME</filename>:
+a genomics sequence in fasta format.
+</para></listitem>
+<listitem><para>
+<filename>$CGAT_HOME/database/genes/aa/SPNAME</filename>:
+translated sequences of genes in fasta format
+(optional; if you want to calculate attribute values associated with
+protein sequences).
+</para></listitem>
+<listitem><para>
+<filename>$CGAT_HOME/database/genes/nt/SPNAME</filename>:
+nucleotide sequences of genes in fasta format
+(optional; if you want to calculate attribute values associated with
+nucleotide sequences).
+</para></listitem>
+<listitem><para>
+<filename>$CGAT_HOME/database/genes/tab/SPNAME</filename>:
+a tab-delimited table of genes
+containing the following information:
+beginning position, ending position,
+direction (1/-1), color code (= function category code; optional),
+the name of the gene, and the name of the product (optional).
+The beginning position must be smaller than the ending position
+even for the gene on the reverse chain.
+The file must begin with a header line containing a tab-delimited list of
+field names as follows,
+<screen>
+#from	to	dir	color	name	product
+190	255	1	1	B0001	thr operon leader peptide
+337	2799	1	1	B0002	bifunctional aspartokinase I/homeserine dehydrogenase I
+2801	3733	1	1	B0003	homoserine kinase
+3734	5020	1	1	B0004	threonine synthase
+5234	5530	1	100	B0005	hypothetical protein
+</screen>
+By default color code is defined base on the MBGD function category.
+Specify '100' if you do not need to assign any color.
+You can change the color code by modifying
+<filename>$CGAT_HOME/etc/colorTab/colorTab.gene</filename>.
+</para></listitem>
+</itemizedlist>
+</para></listitem>
+</orderedlist>
+      </para>
+    </sect2>
+
+    <sect2 id="configBuild">
+      <title> Configuring database building procedure </title>
+	<para>
+Next, you must prepare <filename>$CGAT_HOME/etc/speclist</filename> file,
+which contains information required for the database building procedure.
+The following information should be specified in this file:
+<itemizedlist>
+<listitem><para>
+A set of genomic sequences to be compared. If more than two species are
+specified, all-against-all pairwise comparison will be performed.
+Note that currently CGAT can handle only pairwise comparisons.
+</para></listitem>
+<listitem><para>
+A set of programs to be executed for each sequence set.
+</para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+The <filename>speclist</filename> file consists of macro definition and
+dataset definition sections, where macro definition must precede the
+dataset definition.  Syntax of the definition of macro variable is
+as follows:
+<synopsis>
+SET <varname>varname</varname> = <varname>value</varname>
+</synopsis>
+A dollar sign followed by variable name, e.g. $varname, causes a
+variable substitution, as usual.
+</para>
+
+<para>
+The dataset definition section is a tab-delimited table, containing the
+following fields: <varname>SPNAME_LIST</varname>,
+<varname>PROGRAM_LIST</varname>,<varname>FLAG_UPDATE</varname>,
+and <varname>FLAG_PUBLIC</varname>.
+
+<varname>SPNAME_LIST</varname> is a comma-delimited list specifying
+a set of species to be compared.
+
+<varname>PROGRAM_LIST</varname> is a space-delimited list specifying
+script files to be executed for each species set. The file names
+are relative to the <filename>$CGAT_HOME/build</filename> directory
+and the wildcard characters such as '*' can be used. For example,
+<filename>align/*</filename> specifies all (executable) files under the
+<filename>$CGAT_HOME/build/align</filename> directory. 
+
+<varname>FLAG_UPDATE</varname> and <varname>FLAG_PUBLIC</varname>
+are flags specifying the data should be updated and the data should be
+open to the public (through the CGI script), respectively.
+The value should be 1 (yes) or 0 (no). Default value is 1.
+	</para>
+       <para>
+The following is an example of the <filename>speclist</filename> file.
+The file directs the build script to compare genome sequences
+"hpy" and "hpj" by executing all programs for identifying
+feature segments in the <filename>$CGAT_HOME/build/segment</filename>
+directory, followed by all programs for calculating gene attribute values
+in the <filename>$CGAT_HOME/build/geneattr</filename> directory,
+followed by all programs for calculating alignment between the two genomes
+n the <filename>$CGAT_HOME/build/align</filename> directory.
+<screen>
+####################
+# macro definition
+####################
+SET AlignAll = align/*
+SET SegmentAll = segment/* geneattr/*
+####################
+# dataset definition
+####################
+hpy,hpj	$SegmentAll $AlignAll
+</screen>
+       </para>
+    </sect2>
+
+    <sect2 id="startBuild">
+      <title> Start building </title>
+	<para>
+Run <command>BuildAll.pl</command> under the <filename>$CGAT_HOME/build</filename>
+directory to execute building procedures. This script creates
+<filename>$CGAT_HOME/work</filename> directory if not exists, and move
+to this directory, and then executes programs that have been specified in
+the <filename>$CGAT_HOME/etc/speclist</filename> file in the previous
+section.
+<screen>
+BuildAll.pl
+</screen>
+
+	</para>
+    </sect2>
+    <sect2 id="releaseData">
+    <title> Release data </title>
+    <para>
+Before accessing the created database, you must run
+<command>Release.pl</command> under the <filename>$CGAT_HOME/build</filename>
+ directory to release the data from the <filename>$CGAT_HOME/database.work
+</filename> directory to the <filename>$CGAT_HOME/database
+</filename> directory.
+<screen>
+Release.pl
+</screen>
+    </para>
+    </sect2>
+  </sect1>
+  <sect1>
+    <title> Web server set up </title>
+      <para>
+<application>AlignmentViewer</application> can directly access the resulting
+data file locally when the environmental variable <envar>$CGAT_HOME</envar>
+is correctly set. Therefore you can skip this section if you intend to
+use AlignmentViewer only on the machine on which the database was
+constructed.
+On the other hand, if you want to allow access to the database from
+various machines through the Internet, you must set up a web
+server on the server machine.
+      </para>
+      <para>
+If there is already a HTTP server running on the server, the simplest way
+to add the CGAT service to the existing server is to create a symbolic link
+to <filename>$CGAT_HOME/htdocs/CGAT</filename> on a web site directory.
+For example, if you have a <filename>public_html</filename> directory
+on your home directory as your own homepage, you can add CGAT service
+to this page by creating the above symbolic link on this directory:
+<screen>
+ln -s $CGAT_HOME/htdocs/CGAT ~/public_html
+</screen>
+In this case, the URL for accessing the CGAT service is
+<filename>http://YOUR_MACHINE_ADDRESS/~YOUR_USER_NAME/CGAT/</filename>,
+where YOUR_MACHINE_ADDRESS and YOUR_USER_NAME should be replaced with
+appropriate names. 
+If you are a Mac OSX user, you must have a <filename>Sites</filename> 
+instead of <filename>public_html</filename> directory on your home directory
+as your own home page.
+      </para>
+      <para>
+Next you must edit the <filename>httpd.conf</filename> file to modify
+the server setting.
+
+The location of the <filename>httpd.conf</filename> file is system
+dependent; on Mac OSX, user specific configuration can be described
+in a separate file,
+<filename>/private/etc/apache2/users/USERNAME.conf</filename> (for 10.5) or
+<filename>/etc/httpd/users/USERNAME.conf</filename> (for 10.4),
+where USERNAME should be replaced with your username.
+
+In any way, this step usually requires administrator
+privilege. Please ask an administrator of the machine if you do not
+have the privilege.
+    </para>
+
+    <para>
+The following is a configuration required for the above example
+where the server is located on the public_html directory:
+<screen>
+<![CDATA[
+<Directory /PATH_TO_YOUR_HOME_DIRECTORY/public_html>
+    Options ExecCGI FollowSymLinks
+    AddHandler cgi-script .cgi
+    SetEnv CGAT_HOME /PATH_TO_CGAT_HOME
+    SetEnv PERLLIB /PATH_TO_CGAT_HOME/perllib/
+</Directory>
+]]>
+</screen>
+where /PATH_TO_YOUR_HOME_DIRECTORY and /PATH_TO_CGAT_HOME should
+be replaced with the absolute paths of the respective directories.
+    </para>
+    <para>
+Possibly, you may need to load some additional Apache modules.
+For example, the above setting contains the SetEnv directive which
+requires the mod_env module. If this module is not loaded in the default
+setting, you must add the following line to the
+<filename>httpd.conf</filename> file.
+<screen>
+LoadModule env_module         MODULE_PATH/mod_env.so
+</screen>
+where MODULE_PATH should be replaced with a system dependent module path
+(please ask your administrator).
+      </para>
+    <para>
+Please remember that you must restart the HTTP server to reflect
+the change after you modify the <filename>httpd.conf</filename> file.
+Typically, this can be done by the command <userinput>apachectl restart
+</userinput>.
+Mac OSX users can turn on/off the HTTP server by turning on/off,
+respectively, the "Personal Web Sharing" service in the Sharing pane
+opened through <guimenu>Apple menu &rArr; System preference &rArr;
+Sharing</guimenu>.
+    </para>
+  </sect1>
+<!--
+  <sect1>
+    <title> Extending CGAT </title>
+    <sect2>
+      <title> Adding programs for finding feature segments in each genome</title>
+      <para>
+      </para>
+    </sect2>
+    <sect2>
+      <title> Adding programs for genome alignment </title>
+      <para>
+      </para>
+    </sect2>
+  </sect1>
+-->
+
+  </chapter>
+</book>

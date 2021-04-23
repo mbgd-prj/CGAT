@@ -1,0 +1,17 @@
+#id	color	legend
+1	#bf7fbf	Amino acid biosynthesis
+2	#ff7f7f	Purines, pyrimidines, nucleosides, and nucleotides
+3	#bfffbf	Fatty acid, phospholipid and sterol metabolism
+4	#bf7fff	Biosynthesis of cofactors, prosthetic groups, and carriers
+5	#bfbfff	Central intermediary metabolism
+6	#bfff7f	Energy metabolism
+#7	#bfffff
+8	#ffbfff	Transport and binding proteins
+9	#ff7fff	DNA replication, restriction, modification, recombination, and repair
+10	#ffbf7f	Transcription
+11	#ffbfbf	Translation
+12	#ff7fbf	Regulatory functions
+13	#bfbf7f	Cell envelope
+14	#bfbfbf	Cellular processes
+15	#ffff7f	Other categories
+99999	#ffffbf	Hypothetical

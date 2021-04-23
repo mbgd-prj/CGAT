@@ -1,0 +1,116 @@
+#!/usr/bin/perl -s
+
+use Tools::HomologyParser;
+use Sequence;
+use Alignment;
+
+###############################################################################
+package Tools::CGAT;
+###############################################################################
+@ISA = qw(Tools);
+sub new {
+	my($class) = @_;
+	my($this) = {};
+	bless $this, $class;
+	$this->{parser} = Tools::CGATParser->new;
+	$this;
+}
+###############################################################################
+package Tools::CGATResult;
+###############################################################################
+@ISA = qw(Tools::HomologyResult);
+
+###############################################################################
+package Tools::CGATHSP;
+###############################################################################
+@ISA = qw(Tools::HomologyHSP);
+
+sub new {
+	my($class, %values) = @_;
+	my $this = {};
+	bless $this, $class;
+	$this->set_values(%values);
+	return $this;
+}
+sub set_values {
+	my($this, %values) = @_;
+	foreach $k (keys %values) {
+		$this->{$k} = $values{$k};
+	}
+}
+sub hsp_list {
+	my($this) = @_;
+	return ($this);
+}
+
+###############################################################################
+package Tools::CGATParser;
+###############################################################################
+@ISA = qw(Tools::HomologyParser);
+
+use FileHandle;
+sub new {
+	my($class, @filenames) = @_;
+	my $this = {};
+	bless $this, $class;
+	if (@filenames) {
+		$this->set_filenames(\@filenames);
+	}
+	$this;
+}
+sub readfile {
+	my($this) = @_;
+	my($result) = Tools::CGATResult->new;
+	my($ln);
+	my($status);
+	while ($_ = $this->getline) {
+		chomp();
+		if (/^>/) {
+			s/^>\s*//;
+			my($name1,$from1,$to1,$name2,$from2,$to2,$dir,$ident,$score,$bestflag) = split;
+			$hsp = Tools::CGATHSP->new;
+			$hsp->{name1} = $name1;
+			$hsp->{from1} = $from1;
+			$hsp->{to1} = $to1;
+			$hsp->{name2} = $name2;
+			$hsp->{from2} = $from2;
+			$hsp->{to2} = $to2;
+			$hsp->{dir1} = 1;
+			$hsp->{dir2} = $dir;
+			$hsp->{bestflag} = $bestflag;
+			$result->add_hit($hsp);
+		} else {
+			my($from1,$from2,$len,$ident) = split;
+			my $to1 = $from1 + $len - 1;
+			my $to2 = $from2 + $len - 1;
+			push(@{ $hsp->{align_segments} },
+				{ from1 => $from1,
+				  from2 => $from2,
+				  to1 => $to1,
+				  to2 => $to2,
+				  dir1 => 1,
+				  dir2 => $hsp->{dir2}
+				});
+		}
+        }
+	return $result;
+}
+###############################################################################
+1;#
+###############################################################################
+###############################################################################
+package main;
+if ($0 eq __FILE__) {
+	$parser = Tools::CGATParser->new($ARGV[0]);
+	while ($res = $parser->read) {
+		foreach $hsp ($res->hsp_list) {
+			my $output = $hsp->get_hsp_info([
+				'from1','to1','from2','to2','dir1','dir2']);
+			print join(' ', @{$output}),"\n";
+		}
+	}
+}
+
+###############################################################################
+1;#
+###############################################################################

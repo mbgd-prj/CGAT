@@ -1,0 +1,26 @@
+
+/**
+ * タイトル:     cgat<p>
+ * @version 1.0
+ */
+package cgat;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+public class ExitCommand implements ActionListener {
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public ExitCommand() {
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    public void actionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
+}

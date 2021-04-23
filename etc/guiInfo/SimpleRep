@@ -1,0 +1,8 @@
+#CGI	/dynSearch/SimpleRep.cgi
+label	Simple Repeat Search
+text	min repeat size	minoutrep	1
+text	max repeat size	maxrep	10
+text	match score	matchscore	1
+text	mismatch score	mismatchscore	-3
+text	cutoff score	cutoff	8
+text	min repeat num 	cutrep	4	
