@@ -1,7 +1,13 @@
 #!/usr/bin/perl
 
+use FindBin;
+use lib "$FindBin::Bin/..";
+
 use Alignment;
 use Segment;
+
+use Data::Dumper;
+
 ############################################################
 # Alignment chaining algorithm
 #  see Dan Gusfield (1997)
@@ -129,6 +135,7 @@ sub gapPenalty {
 }
 ############################################################
 package Alignment::Chain;
+use Data::Dumper;
 sub new {
 	my($class, $list) = @_;
 	my($this) = {};

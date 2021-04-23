@@ -1,0 +1,41 @@
+#!/usr/bin/perl -s
+
+###############################################################################
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use lib "$ENV{'CGAT_HOME'}/commands";
+use File::Basename;
+use File::Path;
+use FileHandle;
+require "CGAT_Conf.pl";
+use CGAT_build;
+require 'SimpleRep.pl';
+
+$| = 1;
+###############################################################################
+package build_SimpleRep;
+use base CGAT_buildAnnot;
+###############################################################################
+sub execute_main {
+	my($this, @args) = @_;
+	$SimpleRepOpt = {
+		minoutrep => 1,
+		cutoff => 8,
+		maxrep => 100,
+		matchscore => 1,
+		cutrep => 4,
+		cutratio => 1,
+		mismatchscore => -3,
+	};
+	GenomeFeatureCommand::SimpleRep->execute($this->{sp}, $SimpleRepOpt);
+}
+
+##############################################################################
+if ($0 eq __FILE__) {
+    	$cgat_build = build_SimpleRep->new(\@ARGV);
+        $cgat_build->execute;
+        exit;
+}
+
+###############################################################################
+1;#
+###############################################################################

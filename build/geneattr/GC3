@@ -1,0 +1,36 @@
+#!/usr/bin/perl -s 
+###############################################################################
+use strict;
+use File::Basename;
+use File::Path;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use lib "$ENV{'CGAT_HOME'}/commands";
+use CGAT_build;
+require "CGAT_Conf.pl";
+require 'GC3.pl';
+
+###############################################################################
+package build_GC3;
+use base qw(CGAT_buildGeneAttr);
+###############################################################################
+## create GC3 plot
+sub execute_main {
+	my($this, @args) = @_;
+	my($Opt);
+	$Opt = {
+	};
+	&main::GC3($this->{sp}, $Opt);
+}
+
+###############################################################################
+package main;
+if ($0 eq __FILE__) {
+
+	my $cgat_build = build_GC3->new(\@ARGV);
+	$cgat_build->execute;
+	exit;
+}
+
+###############################################################################
+1;#
+###############################################################################

@@ -8,6 +8,10 @@ package main;
 
 ###############################################################################
 $ENV{'CGAT_HOME'} = "/db/project/MBGD/CGAT" if (! $ENV{'CGAT_HOME'});
+
+use FindBin;
+use lib "$FindBin::Bin/..";
+
 use lib "$ENV{'CGAT_HOME'}/perllib";
 ###############################################################################
 $SYS_name		    = "Linux";

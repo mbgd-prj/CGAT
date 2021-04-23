@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+require 'CGAT_Conf.pl';
+
+@spec = @ARGV;
+foreach $sp (@spec) {
+	$genome_path = &getGenomeFilePath($sp);
+	$ntgene_path = &getGeneFilePath($sp, 'ntseq');
+	$aagene_path = &getGeneFilePath($sp, 'aaseq');
+	$genetab_path = &getGeneFilePath($sp, 'region');
+	foreach $f (<${genome_path}*>) {
+		unlink($f);
+	}
+	foreach $f (<${ntgene_path}*>) {
+		unlink($f);
+	}
+	foreach $f (<${aagene_path}*>) {
+		unlink($f);
+	}
+	unlink($genetab_path);
+}

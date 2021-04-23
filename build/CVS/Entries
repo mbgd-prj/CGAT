@@ -1,0 +1,16 @@
+/BuildAll.pl/1.4/Fri Jun  2 19:29:33 2006//
+/ClearCheckPointFile.pl/1.2/Fri May  5 09:33:14 2006//
+/Release.pl/1.4/Tue May 30 03:43:40 2006//
+/deleteData/1.2/Fri May  5 09:33:14 2006//
+/getDataFromGenBank.pl/1.8/Tue Oct 10 16:08:27 2006//
+/getDataFromMBGD.pl/1.12/Tue Oct 10 16:08:27 2006//
+/tmpcheck.pl/1.2/Fri May  5 09:33:14 2006//
+D/align////
+D/align.in////
+D/attr////
+D/bin////
+D/common////
+D/geneattr////
+D/seg////
+D/segment////
+D/segment.opt////

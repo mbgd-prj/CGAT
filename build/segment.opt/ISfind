@@ -1,0 +1,94 @@
+#!/usr/bin/perl -s
+
+##############################################################################
+#use strict;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use File::Basename;
+use File::Path;
+use CmdProc;
+use GenomeHomSearch::Blast;
+use CGAT_build;
+require "CGAT_Conf.pl";
+use GenomeFeature;
+
+###############################################################################
+package build_ISfind;
+use base CGAT_buildAnnot;
+##############################################################################
+
+##############################################################################
+# Options
+##############################################################################
+$EVALUE = 1e-5;
+$QueryLen = 5000;
+#$NOPT = "-N " . $QueryLen * 2;
+%options = (
+	program => 'blastn',
+#	progopt => "-m 10 -H -E $EVALUE",
+	progopt => "-e $EVALUE",
+	QueryLen => $QueryLen,
+	QueryOverlap => 1000,
+	QueryNum => 200,
+	SkipPostProc => 1,
+);
+## IS database file
+$ISDB = "$main::DIR_database/isdb";
+
+##############################################################################
+sub readISDB {
+	open(IS, $ISDB) || die;
+	while (<IS>) {
+		if (/^>(\S+)\s*Iso:(\S+)\s*Fam:(\S+)/) {
+			$name = $1;
+			$iso = $2;
+			$fam = $3;
+			$Fam{$name} = $fam;
+		}
+	}
+	close(IS);
+}
+sub execute_main {
+	my($this, @args) = @_;
+	my($filesp1) = &main::getGenomeFilePath($this->{sp});
+	$this->{cmdproc}->{filebase} = "$main::DIR_work/fasta.$this->{sp}-isdb";
+
+	$options{database} = $ISDB;
+	$options{query} = $filesp1;
+
+	$this->{homsrch} = GenomeHomSearch::Blast->new( %options );
+	$this->{homsrch}->execute;
+	$this->outputISfind;
+
+	return;
+}
+sub outputISfind {
+	my($this) = @_;
+	my $gfeat =GenomeFeature->new($this->{sp});
+	my $aliList = $this->{homsrch}->get_alignments;
+	$gfeat->add_fields("name");
+	if (! defined %Fam) {
+		&readISDB;
+	}
+	foreach my $ali ($aliList->list) {
+		($from1,$to1,$from2,$to2,$dir,$isname) = 
+			($ali->from1,$ali->to1,$ali->from2,$ali->to2,
+				$ali->dir,$ali->name2);
+		$fam = $Fam{$isname};
+		$gfeat->addSegment($from1,$to1,$dir,$fam, name=>$isname);
+	}
+	$gfeat->write_table();
+}
+
+##############################################################################
+if($0 eq __FILE__) {
+	if (scalar(@ARGV) < 1) {
+		die "usage :: $0 species\n";
+	}
+	$cgat_build = build_ISfind->new(\@ARGV);
+	$cgat_build->execute;
+	exit;
+}
+
+##############################################################################
+1;#
+##############################################################################    

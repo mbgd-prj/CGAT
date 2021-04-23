@@ -1,0 +1,36 @@
+#!/usr/bin/perl -s
+
+##############################################################################
+#use strict;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use File::Basename;
+use File::Path;
+
+use GenomeHomSearch::Waba;
+use CGAT_build;
+require "CGAT_Conf.pl";
+require "libGetOpt.pl";
+require "libLogfile.pl";
+
+##############################################################################
+# Options
+##############################################################################
+%options = (
+	progopt => "",
+#	QueryLen => 200000,
+#	QueryOverlap => 2000,
+#	QueryNum => 1,
+);
+
+##############################################################################
+if (scalar(@ARGV) < 2) {
+	die "Usage: $0 SPEC1 SPEC2\n";
+}
+$build_proc = CGAT_buildAlign->new('Waba', \@ARGV, \%options);
+exit ($build_proc->test) if ($test);
+$build_proc->execute;
+exit;
+
+##############################################################################
+1;#
+##############################################################################    

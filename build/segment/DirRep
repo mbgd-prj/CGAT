@@ -1,0 +1,43 @@
+#!/usr/bin/perl -s
+
+###############################################################################
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use lib "$ENV{'CGAT_HOME'}/commands";
+use File::Basename;
+use File::Path;
+use FileHandle;
+require "CGAT_Conf.pl";
+use CGAT_build;
+require 'Kmatch.pl';
+
+$| = 1;
+###############################################################################
+package build_DirRep;
+use base CGAT_buildAnnot;
+###############################################################################
+sub execute_main {
+    my($this, @args) = @_;
+    my($opt);
+
+	$KmatchOpt = {
+		inverted => '',
+		maxdiff => 5000,
+		mindiff => '',
+		mismatch => 5,
+		minmatchlen => 30,
+		missratio => .15,
+		cuttoff_prob => '',
+	};
+	GenomeFeatureCommand::Kmatch->execute($this->{sp}, $KmatchOpt);
+}
+
+##############################################################################
+if ($0 eq __FILE__) {
+        $cgat_build = build_DirRep->new(\@ARGV);
+        $cgat_build->execute;
+        exit;
+}
+
+###############################################################################
+1;#
+###############################################################################

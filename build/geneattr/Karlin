@@ -1,0 +1,37 @@
+#!/usr/bin/perl -s
+
+###############################################################################
+use strict;
+use File::Basename;
+use File::Path;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use lib "$ENV{'CGAT_HOME'}/commands";
+use CGAT_build;
+require "CGAT_Conf.pl";
+require 'Karlin.pl';
+
+###############################################################################
+package build_Karlin;
+use base qw(CGAT_buildGeneAttr);
+###############################################################################
+## create Karlin plot
+sub execute_main {
+	my($this, @args) = @_;
+	my($Opt);
+	$Opt = {
+	};
+	&main::Karlin($this->{sp}, $Opt);
+}
+
+###############################################################################
+package main;
+if ($0 eq __FILE__) {
+
+	my $cgat_build = build_Karlin->new(\@ARGV);
+	$cgat_build->execute;
+	exit;
+}
+
+###############################################################################
+1;#
+###############################################################################

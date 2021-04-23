@@ -13,13 +13,14 @@ cover_db/
 # Devel::NYTProf
 nytprof.out
 
+
 # Dizt::Zilla
-/.build/
+#/.build/
 
 # Module::Build
-_build/
-Build
-Build.bat
+#_build/
+#Build
+#Build.bat
 
 # Module::Install
 inc/

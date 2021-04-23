@@ -2,8 +2,9 @@
 
 ##############################################################################
 #use strict;
-use lib "$ENV{'CGAT_HOME'}/perllib";
-use lib "$ENV{'CGAT_HOME'}/build/common";
+use FindBin;
+use lib "$FindBin::Bin";
+use lib "$FindBin::Bin/../build/common";
 use File::Basename;
 use File::Path;
 use CmdProc;

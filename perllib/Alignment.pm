@@ -11,6 +11,7 @@ use Alignment::CalcScore;
 use Alignment::OverlapCheck;
 use Util;
 use strict;
+use Data::Dumper;
 
 BEGIN {
 	## suppress warning messages
@@ -1134,6 +1135,7 @@ sub allow_inconsistency { 0; }
 ############################################################
 package SegmentPair;
 ############################################################
+use Data::Dumper;
 @SegmentPair::ISA = qw(Segment);
 sub new {
 	my($class, %val) = @_;
@@ -1279,6 +1281,7 @@ sub shift_coord {
 }
 sub print_segpair {
 	my($this) = @_;
+	#print Dumper($this);
 	$this->{seg1}->print;
 	print "--";
 	$this->{seg2}->print;

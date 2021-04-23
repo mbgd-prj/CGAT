@@ -1,0 +1,34 @@
+#!/usr/bin/perl -s
+
+##############################################################################
+#use strict;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use File::Basename;
+use File::Path;
+
+use GenomeHomSearch::Blast;
+use CGAT_build;
+require "CGAT_Conf.pl";
+require "libGetOpt.pl";
+require "libLogfile.pl";
+
+##############################################################################
+# Options
+##############################################################################
+$EVALUE = $Default_Homology_Opt{CutoffEvalue};
+%options = (
+	program => 'megablast',
+	progopt => "-F F -v 1500 -b 1500 -e $EVALUE",
+);
+##############################################################################
+if (scalar(@ARGV) < 2) {
+	die "Usage: $0 SPEC1 SPEC2\n";
+}
+$build_proc = CGAT_buildAlign->new('Blast', \@ARGV, \%options);
+exit ($build_proc->test) if ($test);
+$build_proc->execute;
+exit;
+
+##############################################################################
+1;#
+##############################################################################    

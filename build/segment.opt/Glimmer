@@ -1,0 +1,32 @@
+#!/usr/bin/perl -s
+
+###############################################################################
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use lib "$ENV{'CGAT_HOME'}/commands";
+use File::Basename;
+use File::Path;
+use FileHandle;
+require "CGAT_Conf.pl";
+use CGAT_build;
+require 'Glimmer.pl';
+
+$| = 1;
+###############################################################################
+package build_Glimmer;
+use base CGAT_buildAnnot;
+###############################################################################
+sub execute_main {
+	my($this, @args) = @_;
+	GenomeFeatureCommand::Glimmer->execute($this->{sp});
+}
+
+##############################################################################
+if ($0 eq __FILE__) {
+    	$cgat_build = build_Glimmer->new(\@ARGV);
+        $cgat_build->execute;
+        exit;
+}
+
+###############################################################################
+1;#
+###############################################################################

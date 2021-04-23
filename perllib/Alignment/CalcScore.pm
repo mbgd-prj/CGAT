@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+use FindBin;
+use lib "$FindBin::Bin/..";
+
 use Sequence;
 use Segment;
 use Debug;

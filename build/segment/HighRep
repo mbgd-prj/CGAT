@@ -1,0 +1,68 @@
+#!/usr/bin/perl -s
+
+##############################################################################
+#use strict;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use File::Basename;
+use File::Path;
+use Alignment::FindRep;
+use CmdProc;
+use GenomeHomSearch::Blast;
+use CGAT_build;
+use GenomeFeature;
+require "CGAT_Conf.pl";
+###############################################################################
+package build_HighRep;
+use base CGAT_buildAnnot;
+##############################################################################
+
+##############################################################################
+# Options
+##############################################################################
+$EVALUE=1e-5;
+%options = (
+	program => 'blastn',
+	progopt => "-F F -v 1500 -b 1500 -e $EVALUE",
+	QueryLen => 500000,
+	QueryOverlap => 2000,
+	QueryNum => 200,
+	SkipPostProc=>1,
+	SkipFinalOverlapCheck=>1,
+	SaveResult => 1,
+);
+
+##############################################################################
+sub execute_main {
+	my($this, @args) = @_;
+	my($sp) = $this->{sp};
+	$options{sp1} = $options{sp2} = $sp;
+	$this->{homsrch} = GenomeHomSearch::Blast->new( %options );
+	$this->{homsrch}->execute;
+	$this->outputHighRep();
+
+	return;
+}
+sub outputHighRep {
+	my($this) = @_;
+	my $aliList = $this->{homsrch}->get_alignments;
+	my $repSegList = Alignment::FindRep->new($aliList,
+		RepNumCut=>$main::Default_Feature_Opt{RepNumCut} )
+			->findRep;
+
+	my($gfeat) = GenomeFeature->new($this->{sp});
+	
+	foreach $seg ($repSegList->list) {
+		$gfeat->addSegment($seg->from, $seg->to, 1, $seg->{status});
+	}
+	$gfeat->write_table();
+}
+
+##############################################################################
+if($0 eq __FILE__) {
+	$cgat_build = build_HighRep->new(\@ARGV);
+	$cgat_build->execute;
+}
+
+##############################################################################
+1;#
+##############################################################################    

@@ -1,0 +1,36 @@
+#!/usr/bin/perl -s
+
+##############################################################################
+#use strict;
+use lib "$ENV{'CGAT_HOME'}/perllib";
+use File::Basename;
+use File::Path;
+
+use GenomeHomSearch::Chaos;
+use CGAT_build;
+require "CGAT_Conf.pl";
+require "libGetOpt.pl";
+require "libLogfile.pl";
+
+##############################################################################
+# Options
+##############################################################################
+%options = (
+	progopt => "",
+	QueryLen => 10000,
+	QueryOverlap => 1000,
+	QueryNum => 1,
+);
+
+##############################################################################
+if (scalar(@ARGV) < 2) {
+	die "Usage: $0 SPEC1 SPEC2\n";
+}
+$build_proc = CGAT_buildAlign->new('Chaos', \@ARGV, \%options);
+exit ($build_proc->test || ! $ENV{'LAGAN_DIR'}) if ($test);
+$build_proc->execute;
+exit;
+
+##############################################################################
+1;#
+##############################################################################    
