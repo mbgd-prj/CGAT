@@ -1,0 +1,16 @@
+===========================================================
+    CGAT (Comparative Genome Analysis Tool)
+===========================================================
+
+Copyright (c) 2006, Ikuo Uchiyama (uchiyama@nibb.ac.jp)
+All rights reserved. 
+
+Reference:
+    Uchiyama, I., Higuchi, T., Kobayashi, I.
+    CGAT: a comparative genome analysis tool for visualizing alignments
+    in the analysis of complex evolutionary changes between closely
+    related genomes
+    BMC Bioinformatics 7, 472 (2006)
+
+Please see the project home page for the latest version:
+    http://mbgd.genome.ad.jp/CGAT/
